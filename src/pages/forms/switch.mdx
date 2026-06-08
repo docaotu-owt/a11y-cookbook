@@ -1,0 +1,355 @@
+---
+title: Switch
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { Switch } from "../../a11y/forms/Switch/Switch.tsx";
+import SwitchRaw from "../../a11y/forms/Switch/Switch.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Switch
+
+A switch allows users to turn a setting on or off.
+
+A switch is similar to a checkbox, but communicates a binary state such as:
+
+- Enabled / Disabled
+- On / Off
+- Active / Inactive
+
+Use a switch when the action immediately affects a setting.
+
+## Example
+
+<CodeExample title="Switch" source={SwitchRaw}>
+  <Switch />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use a visible label.
+- Use `role="switch"` when representing an on/off setting.
+- Keep the checked state synchronized with the UI.
+- Prefer native form controls over custom implementations.
+
+---
+
+## Basic Switch
+
+```html
+<label>
+  <input type="checkbox" role="switch" />
+
+  Email Notifications
+</label>
+```
+
+Screen reader:
+
+```txt
+Email Notifications
+switch
+off
+```
+
+When checked:
+
+```txt
+Email Notifications
+switch
+on
+```
+
+---
+
+## Required Switch
+
+```html
+<label>
+  <input type="checkbox" role="switch" required />
+
+  Enable Security Features
+</label>
+```
+
+Screen reader:
+
+```txt
+Enable Security Features
+required
+switch
+off
+```
+
+---
+
+## Switch with Description
+
+```html
+<label>
+  <input type="checkbox" role="switch" aria-describedby="notification-help" />
+
+  Email Notifications
+</label>
+
+<p id="notification-help">Receive updates about your account activity.</p>
+```
+
+Screen reader:
+
+```txt
+Email Notifications
+switch
+off
+
+Receive updates about your account activity.
+```
+
+---
+
+## Switch with Error
+
+```html
+<label>
+  <input
+    type="checkbox"
+    role="switch"
+    aria-invalid="true"
+    aria-describedby="notification-error"
+  />
+
+  Email Notifications
+</label>
+
+<p id="notification-error">You must enable notifications before continuing.</p>
+```
+
+Screen reader:
+
+```txt
+Email Notifications
+invalid entry
+switch
+
+You must enable notifications before continuing.
+```
+
+---
+
+## Checked State
+
+```html
+<input type="checkbox" role="switch" checked />
+```
+
+Screen reader:
+
+```txt
+switch
+on
+```
+
+---
+
+## Unchecked State
+
+```html
+<input type="checkbox" role="switch" />
+```
+
+Screen reader:
+
+```txt
+switch
+off
+```
+
+---
+
+## Switch vs Checkbox
+
+These controls are visually similar but communicate different intent.
+
+### Checkbox
+
+```html
+<input type="checkbox" />
+```
+
+Screen reader:
+
+```txt
+checkbox
+checked
+```
+
+Use for:
+
+- Selecting options
+- Multi-select forms
+- Preferences
+
+Examples:
+
+```txt
+☑ Email
+☑ SMS
+☐ Push Notifications
+```
+
+---
+
+### Switch
+
+```html
+<input type="checkbox" role="switch" />
+```
+
+Screen reader:
+
+```txt
+switch
+on
+```
+
+Use for:
+
+- Feature toggles
+- Settings
+- Enable / Disable actions
+
+Examples:
+
+```txt
+Dark Mode
+On
+
+Email Notifications
+Off
+```
+
+---
+
+## Keyboard Support
+
+Native switches inherit keyboard support from checkboxes.
+
+| Key         | Action                   |
+| ----------- | ------------------------ |
+| Tab         | Focus switch             |
+| Shift + Tab | Move to previous element |
+| Space       | Toggle switch            |
+
+---
+
+## Common Mistakes
+
+### ❌ Clickable Div
+
+```html
+<div class="switch" onclick="toggle()"></div>
+```
+
+Problems:
+
+- Not keyboard accessible.
+- No semantic meaning.
+- Screen readers do not recognize it as a switch.
+
+---
+
+### ✅ Native Control
+
+```html
+<input type="checkbox" role="switch" />
+```
+
+Provides:
+
+- Keyboard support
+- Screen reader support
+- Form integration
+
+---
+
+### ❌ Missing Label
+
+```html
+<input type="checkbox" role="switch" />
+```
+
+Screen readers may announce:
+
+```txt
+switch
+off
+```
+
+without explaining what the switch controls.
+
+---
+
+### ✅ Visible Label
+
+```html
+<label>
+  <input type="checkbox" role="switch" />
+
+  Email Notifications
+</label>
+```
+
+Screen reader:
+
+```txt
+Email Notifications
+switch
+off
+```
+
+---
+
+### ❌ State Not Updated
+
+```html
+<input type="checkbox" role="switch" aria-checked="true" />
+```
+
+while the visual UI shows OFF.
+
+Assistive technologies and visual users receive conflicting information.
+
+---
+
+### ✅ Keep State Synchronized
+
+```html
+<input type="checkbox" role="switch" checked />
+```
+
+The visual and accessible states should always match.
+
+---
+
+## When to Use
+
+Use a switch when users are toggling a setting between two states.
+
+Examples:
+
+- Dark Mode
+- Email Notifications
+- Auto Save
+- Two-Factor Authentication
+- Location Services
+
+Prefer a checkbox when users are selecting options in a form.
+
+Think of it as:
+
+```txt
+Checkbox = Select this option
+
+Switch = Turn this setting on or off
+```

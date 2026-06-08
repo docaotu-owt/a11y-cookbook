@@ -1,0 +1,224 @@
+---
+title: aria-expanded
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaExpanded } from "../../a11y/aria/AriaExpanded.tsx";
+import AriaExpandedRaw from "../../a11y/aria/AriaExpanded.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-expanded
+
+`aria-expanded` indicates whether a control is currently expanded or collapsed.
+
+It is commonly used on buttons that show or hide content.
+
+Examples include:
+
+- Accordion
+- FAQ
+- Navigation menu
+- Tree view
+- Dropdown menu
+- Disclosure component
+
+## Example
+
+<CodeExample title="aria-expanded" source={AriaExpandedRaw}>
+  <AriaExpanded client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Applied to the control that toggles content.
+- Typically paired with `aria-controls`.
+- Screen readers announce the expanded state.
+- The value should always reflect the actual UI state.
+
+---
+
+## Accordion Example
+
+```html
+<button aria-expanded="false" aria-controls="faq-panel">
+  What is Accessibility?
+</button>
+
+<div id="faq-panel" hidden>
+  Accessibility ensures websites can be used by people with disabilities.
+</div>
+```
+
+Collapsed state:
+
+```txt
+What is Accessibility?
+button
+collapsed
+```
+
+---
+
+When expanded:
+
+```html
+<button aria-expanded="true" aria-controls="faq-panel">
+  What is Accessibility?
+</button>
+```
+
+Screen reader:
+
+```txt
+What is Accessibility?
+button
+expanded
+```
+
+---
+
+## Navigation Menu
+
+A common mobile navigation pattern.
+
+```html
+<button aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+```
+
+Screen reader:
+
+```txt
+Menu
+button
+collapsed
+```
+
+When opened:
+
+```html
+<button aria-expanded="true" aria-controls="mobile-menu">Menu</button>
+```
+
+Screen reader:
+
+```txt
+Menu
+button
+expanded
+```
+
+---
+
+## Dropdown Button
+
+```html
+<button aria-expanded="false" aria-controls="actions-menu">Actions</button>
+```
+
+Screen reader:
+
+```txt
+Actions
+button
+collapsed
+```
+
+---
+
+## Relationship with aria-controls
+
+`aria-controls` identifies the element being expanded or collapsed.
+
+```html
+<button aria-expanded="true" aria-controls="faq-panel">FAQ</button>
+
+<div id="faq-panel">...</div>
+```
+
+Think of:
+
+```txt
+aria-expanded = current state
+aria-controls = target element
+```
+
+---
+
+## Common Mistakes
+
+### ❌ Missing aria-expanded
+
+```html
+<button>Show Details</button>
+```
+
+Screen readers cannot determine whether the content is open or closed.
+
+---
+
+### ✅ Include aria-expanded
+
+```html
+<button aria-expanded="false">Show Details</button>
+```
+
+---
+
+### ❌ State Does Not Match UI
+
+```html
+<button aria-expanded="false">Show Details</button>
+
+<div>Content is visible</div>
+```
+
+The attribute says collapsed, but the content is visible.
+
+Assistive technology receives incorrect information.
+
+---
+
+### ✅ Keep State Synchronized
+
+```html
+<button aria-expanded="true">Show Details</button>
+
+<div>Content is visible</div>
+```
+
+---
+
+### ❌ Using aria-expanded on Non-Control Elements
+
+```html
+<div aria-expanded="true">Content</div>
+```
+
+`aria-expanded` should generally be applied to the element users interact with (usually a button).
+
+---
+
+### ✅ Apply to the Trigger
+
+```html
+<button aria-expanded="true" aria-controls="content">Show Details</button>
+```
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Accordion
+- FAQ
+- Dropdown menu
+- Mobile navigation
+- Tree view
+- Disclosure widget
+- Expand / collapse sections
+
+Avoid using `aria-expanded` on elements that do not control expandable content.
+
+The value should always accurately represent the current UI state.

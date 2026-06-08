@@ -1,0 +1,254 @@
+---
+title: Content Editable
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { ContentEditable } from "../../a11y/forms/ContentEditable/ContentEditable.tsx";
+import ContentEditableRaw from "../../a11y/forms/ContentEditable/ContentEditable.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Content Editable
+
+The `contenteditable` attribute allows users to edit the content of an element directly.
+
+It is commonly used for:
+
+- Chat composers
+- Rich text editors
+- Wiki editors
+- Inline editing
+- Document editors
+
+Whenever possible, prefer native form controls such as `<input>` and `<textarea>`. Use `contenteditable` when rich text editing or custom editing experiences are required.
+
+## Example
+
+<CodeExample title="Content Editable" source={ContentEditableRaw}>
+  <ContentEditable />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use `role="textbox"` to expose the element as an editable text field.
+- Use `aria-multiline="true"` for multi-line editing.
+- Provide an accessible name using `aria-label` or `aria-labelledby`.
+- Use `aria-describedby` for helper text or validation messages.
+- Ensure keyboard users can focus and edit the content.
+
+---
+
+## Chat Composer
+
+```html
+<div
+  contenteditable="true"
+  role="textbox"
+  aria-label="Message"
+  aria-multiline="true"
+></div>
+```
+
+Screen reader:
+
+```txt
+Message
+edit text
+multi-line
+```
+
+---
+
+## Rich Text Editor
+
+```html
+<h2 id="editor-title">Description</h2>
+
+<div
+  contenteditable="true"
+  role="textbox"
+  aria-labelledby="editor-title"
+  aria-multiline="true"
+></div>
+```
+
+Screen reader:
+
+```txt
+Description
+edit text
+multi-line
+```
+
+---
+
+## With Helper Text
+
+```html
+<div
+  contenteditable="true"
+  role="textbox"
+  aria-label="Message"
+  aria-describedby="message-help"
+  aria-multiline="true"
+></div>
+
+<p id="message-help">Press Enter to send.</p>
+```
+
+Screen reader:
+
+```txt
+Message
+edit text
+
+Press Enter to send.
+```
+
+---
+
+## With Error Message
+
+```html
+<div
+  contenteditable="true"
+  role="textbox"
+  aria-label="Description"
+  aria-invalid="true"
+  aria-describedby="editor-error"
+  aria-multiline="true"
+></div>
+
+<p id="editor-error">Description is required.</p>
+```
+
+Screen reader:
+
+```txt
+Description
+invalid entry
+
+Description is required.
+```
+
+---
+
+## Common Mistakes
+
+### ❌ Missing Accessible Name
+
+```html
+<div contenteditable="true" role="textbox"></div>
+```
+
+Screen readers know the element is editable, but users may not know its purpose.
+
+---
+
+### ✅ Provide an Accessible Name
+
+```html
+<div contenteditable="true" role="textbox" aria-label="Message"></div>
+```
+
+---
+
+### ❌ Missing Textbox Role
+
+```html
+<div contenteditable="true"></div>
+```
+
+Some assistive technologies may not announce it as a text input.
+
+---
+
+### ✅ Use role="textbox"
+
+```html
+<div contenteditable="true" role="textbox"></div>
+```
+
+---
+
+### ❌ Missing Multi-line Semantics
+
+```html
+<div contenteditable="true" role="textbox"></div>
+```
+
+Users may not know Enter creates a new line.
+
+---
+
+### ✅ Use aria-multiline
+
+```html
+<div contenteditable="true" role="textbox" aria-multiline="true"></div>
+```
+
+---
+
+### ❌ Using Placeholder as the Only Label
+
+```html
+<div contenteditable="true" role="textbox">Type a message...</div>
+```
+
+Placeholder text is not a reliable accessible name.
+
+---
+
+### ✅ Use aria-label
+
+```html
+<div contenteditable="true" role="textbox" aria-label="Message"></div>
+```
+
+---
+
+## Content Editable vs Textarea
+
+### Textarea
+
+```html
+<textarea></textarea>
+```
+
+Use for:
+
+- Comments
+- Feedback
+- Notes
+- Plain text input
+
+---
+
+### Content Editable
+
+```html
+<div contenteditable="true" role="textbox"></div>
+```
+
+Use for:
+
+- Rich text editors
+- Chat composers
+- Inline editing
+- Document editors
+
+---
+
+## When to Use
+
+Use `contenteditable` when users need advanced editing capabilities beyond plain text.
+
+Examples:
+
+- Rich text formatting
+- Mentions
+- Links
+- Inline editing
+- Collaborative editors
+
+For most forms, prefer a native `<textarea>` because it provides built-in accessibility and keyboard behavior.

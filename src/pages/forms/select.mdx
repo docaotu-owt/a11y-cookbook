@@ -1,0 +1,252 @@
+---
+title: Select
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { Select } from "../../a11y/forms/Select/Select.tsx";
+import SelectRaw from "../../a11y/forms/Select/Select.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Select
+
+A select allows users to choose a single option from a list of predefined values.
+
+Whenever possible, prefer the native `<select>` element over a custom dropdown. Native selects provide built-in keyboard support, screen reader support, and mobile-friendly behavior.
+
+## Example
+
+<CodeExample title="Select" source={SelectRaw}>
+  <Select />
+</CodeExample>
+
+## Accessibility Notes
+
+- Every select should have an associated label.
+- Prefer native `<select>` over custom dropdown implementations.
+- Include a placeholder option when a selection is required.
+- Use `aria-describedby` for helper text.
+- Use `aria-invalid` for validation errors.
+
+---
+
+## Basic Select
+
+```html
+<label for="country"> Country </label>
+
+<select id="country">
+  <option value="">Select a country</option>
+
+  <option value="vn">Vietnam</option>
+
+  <option value="jp">Japan</option>
+
+  <option value="sg">Singapore</option>
+</select>
+```
+
+Screen reader:
+
+```txt
+Country
+combo box
+collapsed
+```
+
+---
+
+## Select with Description
+
+```html
+<label for="country"> Country </label>
+
+<select id="country" aria-describedby="country-help">
+  ...
+</select>
+
+<p id="country-help">Select your country of residence.</p>
+```
+
+Screen reader:
+
+```txt
+Country
+combo box
+
+Select your country of residence.
+```
+
+---
+
+## Required Select
+
+```html
+<label for="country"> Country </label>
+
+<select id="country" required>
+  <option value="">Select a country</option>
+
+  ...
+</select>
+```
+
+Screen reader:
+
+```txt
+Country
+required
+combo box
+```
+
+---
+
+## Select with Error
+
+```html
+<label for="country"> Country </label>
+
+<select id="country" aria-invalid="true" aria-describedby="country-error">
+  ...
+</select>
+
+<p id="country-error">Please select a country.</p>
+```
+
+Screen reader:
+
+```txt
+Country
+invalid entry
+
+Please select a country.
+```
+
+---
+
+## Placeholder Option
+
+A common pattern is to provide a placeholder option.
+
+```html
+<select>
+  <option value="">Select a country</option>
+
+  <option value="vn">Vietnam</option>
+</select>
+```
+
+This gives users an explicit prompt before making a selection.
+
+---
+
+## Keyboard Support
+
+Native selects provide built-in keyboard behavior.
+
+| Key        | Action          |
+| ---------- | --------------- |
+| Tab        | Focus select    |
+| Space      | Open select     |
+| Enter      | Open select     |
+| Arrow Up   | Previous option |
+| Arrow Down | Next option     |
+| Home       | First option    |
+| End        | Last option     |
+
+---
+
+## Common Mistakes
+
+### ❌ Missing Label
+
+```html
+<select>
+  <option>Vietnam</option>
+</select>
+```
+
+Screen readers may not announce a meaningful name.
+
+---
+
+### ✅ Associated Label
+
+```html
+<label for="country"> Country </label>
+
+<select id="country">
+  ...
+</select>
+```
+
+---
+
+### ❌ Placeholder Used as Label
+
+```html
+<select>
+  <option>Select a country</option>
+</select>
+```
+
+The placeholder does not replace a label.
+
+---
+
+### ✅ Provide a Label
+
+```html
+<label for="country"> Country </label>
+
+<select id="country">
+  <option value="">Select a country</option>
+</select>
+```
+
+---
+
+### ❌ Custom Dropdown Without Accessibility
+
+```html
+<div class="dropdown">Country</div>
+```
+
+Custom dropdowns require substantial accessibility work:
+
+- Keyboard support
+- Focus management
+- Screen reader support
+- ARIA roles and states
+
+---
+
+### ✅ Prefer Native Select
+
+```html
+<select>
+  ...
+</select>
+```
+
+Native controls are accessible by default.
+
+---
+
+## When to Use
+
+Use a select when:
+
+- Users must choose one option from a predefined list.
+- The number of options is relatively small.
+- Free-form text entry is not needed.
+
+Examples:
+
+- Country
+- Language
+- Timezone
+- Currency
+- Status
+
+Prefer a native select whenever it satisfies the requirements.

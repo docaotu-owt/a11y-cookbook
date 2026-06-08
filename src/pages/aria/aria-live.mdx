@@ -1,0 +1,343 @@
+---
+title: aria-live
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaLive } from "../../a11y/aria/AriaLive.tsx";
+import AriaLiveRaw from "../../a11y/aria/AriaLive.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-live
+
+`aria-live` tells assistive technologies to automatically announce content updates without moving focus.
+
+Normally, screen readers only announce content when users navigate to it.
+
+Live regions allow important updates to be announced automatically.
+
+Common examples include:
+
+- Form validation
+- Save confirmation
+- Loading status
+- Search results
+- Chat messages
+- Toast notifications
+
+## Example
+
+<CodeExample title="aria-live" source={AriaLiveRaw}>
+  <AriaLive client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Announces dynamic content changes.
+- Users do not need to move focus.
+- Only updated content is announced.
+- The live region should exist before the content changes.
+
+---
+
+## Save Confirmation
+
+```html
+<button>Save Profile</button>
+
+<div aria-live="polite">Profile saved successfully.</div>
+```
+
+Screen reader:
+
+```txt
+Profile saved successfully.
+```
+
+The user remains focused on the button, but the update is announced automatically.
+
+---
+
+## Search Results
+
+```html
+<div aria-live="polite">24 results found.</div>
+```
+
+Screen reader:
+
+```txt
+24 results found.
+```
+
+Useful when results update after filtering or searching.
+
+---
+
+## Form Validation
+
+```html
+<div aria-live="polite">Please enter a valid email address.</div>
+```
+
+Screen reader:
+
+```txt
+Please enter a valid email address.
+```
+
+Users are informed immediately when validation messages appear.
+
+---
+
+## Loading Status
+
+```html
+<div aria-live="polite">Loading products...</div>
+```
+
+Later:
+
+```html
+<div aria-live="polite">Products loaded.</div>
+```
+
+Screen reader:
+
+```txt
+Loading products...
+```
+
+then
+
+```txt
+Products loaded.
+```
+
+---
+
+## Toast Notification
+
+```html
+<div aria-live="polite">Settings saved successfully.</div>
+```
+
+Screen reader:
+
+```txt
+Settings saved successfully.
+```
+
+Without a live region, many screen reader users may never know the toast appeared.
+
+---
+
+## aria-live="polite"
+
+```html
+<div aria-live="polite">Profile saved successfully.</div>
+```
+
+Screen readers wait until the user is idle before announcing.
+
+Use for:
+
+- Success messages
+- Status updates
+- Search results
+- Non-critical notifications
+
+---
+
+## aria-live="assertive"
+
+```html
+<div aria-live="assertive">Session expired.</div>
+```
+
+Screen readers interrupt current speech and announce immediately.
+
+Use for:
+
+- Critical errors
+- Session expiration
+- Security warnings
+- Important alerts
+
+Example:
+
+```txt
+Session expired.
+```
+
+is usually more important than whatever is currently being read.
+
+---
+
+## polite vs assertive
+
+### polite
+
+```html
+aria-live="polite"
+```
+
+Behavior:
+
+```txt
+Wait until current announcement finishes.
+```
+
+Examples:
+
+- Save successful
+- Search results
+- Loading complete
+
+---
+
+### assertive
+
+```html
+aria-live="assertive"
+```
+
+Behavior:
+
+```txt
+Interrupt current announcement immediately.
+```
+
+Examples:
+
+- Session expired
+- Payment failed
+- Critical system error
+
+---
+
+## role="status"
+
+A common shortcut for polite announcements.
+
+```html
+<div role="status">Profile saved successfully.</div>
+```
+
+Equivalent to:
+
+```html
+<div aria-live="polite">Profile saved successfully.</div>
+```
+
+Useful for status updates.
+
+---
+
+## role="alert"
+
+A common shortcut for assertive announcements.
+
+```html
+<div role="alert">Payment failed.</div>
+```
+
+Equivalent to:
+
+```html
+<div aria-live="assertive">Payment failed.</div>
+```
+
+Screen reader:
+
+```txt
+Payment failed.
+```
+
+announced immediately.
+
+---
+
+## Common Mistakes
+
+### ❌ Creating the Live Region Only When Needed
+
+```html
+<!-- inserted dynamically -->
+<div aria-live="polite">Saved successfully.</div>
+```
+
+Some screen readers may not announce the update consistently.
+
+---
+
+### ✅ Keep the Region Present
+
+```html
+<div aria-live="polite">
+  <!-- content updates here -->
+</div>
+```
+
+Update the content inside the region.
+
+---
+
+### ❌ Using assertive for Everything
+
+```html
+<div aria-live="assertive">Search completed.</div>
+```
+
+This can become disruptive.
+
+---
+
+### ✅ Use polite for Non-Critical Updates
+
+```html
+<div aria-live="polite">Search completed.</div>
+```
+
+---
+
+### ❌ Relying on Visual Toasts Alone
+
+```html
+<div class="toast">Saved successfully.</div>
+```
+
+Sighted users see the toast.
+
+Screen reader users may never know it appeared.
+
+---
+
+### ✅ Announce Toast Messages
+
+```html
+<div class="toast" aria-live="polite">Saved successfully.</div>
+```
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Success messages
+- Error messages
+- Toast notifications
+- Search results
+- Loading states
+- Chat messages
+- Status updates
+
+Think of `aria-live` as:
+
+```txt
+Something changed on the page.
+Tell the user automatically.
+```
+
+without requiring them to move focus or navigate to the updated content.

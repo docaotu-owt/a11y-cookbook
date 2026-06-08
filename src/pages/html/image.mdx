@@ -1,0 +1,85 @@
+---
+title: Image
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { ImageGood } from "../../a11y/semantic-html/Image/ImageGood.tsx";
+import ImageGoodRaw from "../../a11y/semantic-html/Image/ImageGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Image
+
+Images should provide alternative text when they convey information.
+
+## Good Example
+
+<CodeExample title={"Image example"} source={ImageGoodRaw}>
+  <ImageGood />
+</CodeExample>
+
+## Bad Example
+
+```tsx
+<img src="/chart.png" />
+```
+
+## Accessibility Notes
+
+- Use meaningful `alt` text for informative images.
+- Use `alt=""` for decorative images.
+- Avoid repeating nearby text in the alt attribute.
+- Alternative text should describe the image's purpose, not every visual detail.
+
+## Keyboard Support
+
+Images are not interactive by default.
+
+If an image acts as a control, use a button or link instead.
+
+## Screen Reader Output
+
+```txt
+Sales chart showing revenue growth from January to June
+```
+
+## Common Mistakes
+
+❌ Missing alt text
+
+```html
+<img src="/chart.png" />
+```
+
+✅ Informative image
+
+```html
+<img
+  src="/chart.png"
+  alt="Sales chart showing revenue growth from January to June"
+/>
+```
+
+❌ Redundant alt text
+
+```html
+<img src="/logo.png" alt="Image of company logo" />
+```
+
+✅ Concise alt text
+
+```html
+<img src="/logo.png" alt="Acme Corporation" />
+```
+
+❌ Decorative image announced unnecessarily
+
+```html
+<img src="/divider.svg" alt="decorative divider" />
+```
+
+✅ Decorative image hidden from screen readers
+
+```html
+<img src="/divider.svg" alt="" />
+```

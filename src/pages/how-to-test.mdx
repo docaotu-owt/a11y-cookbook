@@ -1,0 +1,97 @@
+---
+title: How to test ?
+layout: ../layouts/Layout.astro
+---
+
+## How to Test
+
+This page can be used to verify how assistive technologies interpret common HTML elements such as headings, links, buttons, images, lists, tables, and form controls.
+
+### Keyboard Navigation
+
+Try navigating the page without using a mouse.
+
+| Key         | Action                                   |
+| ----------- | ---------------------------------------- |
+| Tab         | Move to the next interactive element     |
+| Shift + Tab | Move to the previous interactive element |
+| Enter       | Activate a link or button                |
+| Space       | Activate a button, checkbox, or switch   |
+
+Verify that:
+
+- All interactive elements can receive focus.
+- Focus order is logical.
+- Visible focus indicators are present.
+- No mouse interaction is required.
+
+---
+
+### macOS (VoiceOver)
+
+Enable VoiceOver:
+
+```txt
+⌘ + F5
+```
+
+Common shortcuts:
+
+| Shortcut             | Action        |
+| -------------------- | ------------- |
+| Control + Option + → | Next item     |
+| Control + Option + ← | Previous item |
+| Control + Option + A | Read all      |
+| Control + Option + U | Open Rotor    |
+
+Using VoiceOver, verify that:
+
+- Headings announce their level.
+- Links announce as links.
+- Buttons announce as buttons.
+- Images announce their alternative text.
+- Lists announce the number of items.
+- Tables announce row and column headers.
+- Form controls announce their labels.
+
+---
+
+### Windows (NVDA)
+
+Install and launch NVDA.
+
+Common shortcuts:
+
+| Shortcut   | Action          |
+| ---------- | --------------- |
+| H          | Next heading    |
+| K          | Next link       |
+| B          | Next button     |
+| T          | Next table      |
+| F          | Next form field |
+| Insert + ↓ | Read all        |
+
+Using NVDA, verify that:
+
+- Headings are announced correctly.
+- Form controls announce their labels.
+- Tables announce associated headers.
+- Images announce alternative text.
+- Interactive elements expose the correct role.
+
+---
+
+### Accessibility Checklist
+
+Use this checklist when testing examples:
+
+- [ ] All functionality is keyboard accessible
+- [ ] Focus order is logical
+- [ ] Visible focus indicators are present
+- [ ] Headings follow a logical hierarchy
+- [ ] Links have meaningful text
+- [ ] Buttons clearly describe their action
+- [ ] Images have appropriate alternative text
+- [ ] Form controls have labels
+- [ ] Tables use proper headers
+- [ ] Screen readers announce content correctly

@@ -1,0 +1,125 @@
+---
+title: Label
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { LabelGood } from "../../a11y/forms/Label/LabelGood.tsx";
+import LabelGoodRaw from "../../a11y/forms/Label/LabelGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Label
+
+Labels provide an accessible name for form controls.
+
+Screen readers use labels to announce the purpose of an input, select, textarea, checkbox, or radio button.
+
+## Good Example
+
+<CodeExample title={"Label example"} source={LabelGoodRaw}>
+  <LabelGood />
+</CodeExample>
+
+## Bad Example
+
+```tsx
+<input type="email" placeholder="Email Address" />
+```
+
+Using a placeholder alone does not provide a proper label.
+
+## Accessibility Notes
+
+- Every form control should have a label.
+- Associate labels using `htmlFor` and `id`.
+- Clicking a label should move focus to the associated control.
+- Placeholders should not replace labels.
+- Labels provide the accessible name announced by screen readers.
+
+## Screen Reader Output
+
+```txt
+Email Address
+edit text
+```
+
+Without a label:
+
+```txt
+edit text
+```
+
+or
+
+```txt
+blank
+```
+
+depending on the screen reader.
+
+## Keyboard Support
+
+| Key         | Action                             |
+| ----------- | ---------------------------------- |
+| Tab         | Move focus to the input            |
+| Shift + Tab | Move focus to the previous control |
+
+## Common Mistakes
+
+### ❌ Placeholder as Label
+
+```html
+<input type="email" placeholder="Email Address" />
+```
+
+Problems:
+
+- Placeholder disappears when typing.
+- Lower contrast may affect readability.
+- Not a reliable accessible name.
+
+### ✅ Proper Label
+
+```html
+<label for="email"> Email Address </label>
+
+<input id="email" type="email" />
+```
+
+---
+
+### ❌ Missing Association
+
+```html
+<label>Email Address</label>
+
+<input type="email" />
+```
+
+The label is not associated with the input.
+
+### ✅ Associated Label
+
+```html
+<label for="email"> Email Address </label>
+
+<input id="email" type="email" />
+```
+
+## Why It Matters
+
+Users of screen readers rely on labels to understand the purpose of form controls.
+
+A properly associated label allows assistive technologies to announce:
+
+```txt
+Email Address, edit text
+```
+
+instead of:
+
+```txt
+edit text
+```
+
+which provides little or no context.

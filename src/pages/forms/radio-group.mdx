@@ -1,0 +1,331 @@
+---
+title: Radio Group
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { RadioGroup } from "../../a11y/forms/RadioGroup/RadioGroup.tsx";
+import RadioGroupRaw from "../../a11y/forms/RadioGroup/RadioGroup.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Radio Group
+
+Radio buttons allow users to select a single option from a group.
+
+Unlike checkboxes, only one radio button within a group can be selected at a time.
+
+Radio buttons should almost always be grouped using a `fieldset` and `legend`.
+
+## Example
+
+<CodeExample title="Radio Group" source={RadioGroupRaw}>
+  <RadioGroup />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use the same `name` attribute for related radios.
+- Group radios using `fieldset`.
+- Provide a group label using `legend`.
+- Every radio button should have an associated label.
+
+---
+
+## Basic Radio Group
+
+```html
+<fieldset>
+  <legend>Preferred Contact Method</legend>
+
+  <div>
+    <input id="contact-email" type="radio" name="contact" />
+
+    <label for="contact-email"> Email </label>
+  </div>
+
+  <div>
+    <input id="contact-phone" type="radio" name="contact" />
+
+    <label for="contact-phone"> Phone </label>
+  </div>
+
+  <div>
+    <input id="contact-sms" type="radio" name="contact" />
+
+    <label for="contact-sms"> SMS </label>
+  </div>
+</fieldset>
+```
+
+Screen reader:
+
+```txt
+Preferred Contact Method
+group
+
+Email
+radio button
+1 of 3
+```
+
+---
+
+## Required Radio Group
+
+```html
+<fieldset>
+  <legend>Preferred Contact Method</legend>
+
+  <input type="radio" name="contact" required />
+
+  ...
+</fieldset>
+```
+
+Screen reader:
+
+```txt
+Preferred Contact Method
+required
+group
+```
+
+---
+
+## Radio Group with Description
+
+```html
+<fieldset aria-describedby="contact-help">
+  <legend>Preferred Contact Method</legend>
+
+  ...
+</fieldset>
+
+<p id="contact-help">Select the method we should use to contact you.</p>
+```
+
+Screen reader:
+
+```txt
+Preferred Contact Method
+group
+
+Select the method we should use to contact you.
+```
+
+---
+
+## Radio Group with Error
+
+```html
+<fieldset aria-describedby="contact-error">
+  <legend>Preferred Contact Method</legend>
+
+  ...
+</fieldset>
+
+<p id="contact-error">Please select a contact method.</p>
+```
+
+Screen reader:
+
+```txt
+Preferred Contact Method
+group
+
+Please select a contact method.
+```
+
+---
+
+## Keyboard Support
+
+Native radio groups provide built-in keyboard support.
+
+| Key         | Action               |
+| ----------- | -------------------- |
+| Tab         | Enter radio group    |
+| Shift + Tab | Leave radio group    |
+| Arrow Up    | Previous option      |
+| Arrow Down  | Next option          |
+| Arrow Left  | Previous option      |
+| Arrow Right | Next option          |
+| Space       | Select focused radio |
+
+---
+
+## Why Fieldset and Legend Matter
+
+Without grouping:
+
+```html
+<input type="radio" name="contact" />
+
+<input type="radio" name="contact" />
+
+<input type="radio" name="contact" />
+```
+
+Screen reader users hear:
+
+```txt
+Email radio button
+Phone radio button
+SMS radio button
+```
+
+but may not know what question these options answer.
+
+---
+
+With a fieldset:
+
+```html
+<fieldset>
+  <legend>Preferred Contact Method</legend>
+
+  ...
+</fieldset>
+```
+
+Screen reader users hear:
+
+```txt
+Preferred Contact Method
+group
+```
+
+before entering the radio buttons.
+
+---
+
+## Common Mistakes
+
+### ❌ Missing Labels
+
+```html
+<input type="radio" />
+```
+
+Screen readers cannot determine what the option represents.
+
+---
+
+### ✅ Associated Labels
+
+```html
+<input id="email" type="radio" />
+
+<label for="email"> Email </label>
+```
+
+---
+
+### ❌ Different Name Attributes
+
+```html
+<input type="radio" name="email" />
+
+<input type="radio" name="phone" />
+```
+
+These become separate radio groups.
+
+Users can select both options.
+
+---
+
+### ✅ Shared Name Attribute
+
+```html
+<input type="radio" name="contact" />
+
+<input type="radio" name="contact" />
+```
+
+Only one option can be selected.
+
+---
+
+### ❌ No Fieldset
+
+```html
+<input type="radio" name="contact" />
+
+<input type="radio" name="contact" />
+```
+
+The relationship between options is unclear.
+
+---
+
+### ✅ Use Fieldset and Legend
+
+```html
+<fieldset>
+  <legend>Preferred Contact Method</legend>
+
+  ...
+</fieldset>
+```
+
+---
+
+## Radio vs Checkbox
+
+### Radio
+
+```html
+<input type="radio" />
+```
+
+Use when:
+
+```txt
+Only one option may be selected.
+```
+
+Examples:
+
+- Payment method
+- Shipping method
+- Contact method
+
+---
+
+### Checkbox
+
+```html
+<input type="checkbox" />
+```
+
+Use when:
+
+```txt
+Multiple options may be selected.
+```
+
+Examples:
+
+- Notification preferences
+- Interests
+- Hobbies
+
+---
+
+## When to Use
+
+Use radio buttons when:
+
+- Users must choose exactly one option.
+- All options should remain visible.
+- The number of options is relatively small.
+
+Examples:
+
+- Payment Method
+- Contact Preference
+- Theme Selection
+- Shipping Option
+
+For larger lists, consider a Select instead.

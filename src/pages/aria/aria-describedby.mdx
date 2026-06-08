@@ -1,0 +1,245 @@
+---
+title: aria-describedby
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaDescribedBy } from "../../a11y/aria/AriaDescribedBy.jsx";
+import AriaDescribedByRaw from "../../a11y/aria/AriaDescribedBy.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-describedby
+
+`aria-describedby` associates an element with additional descriptive content.
+
+Unlike `aria-label` and `aria-labelledby`, which provide an **accessible name**, `aria-describedby` provides an **accessible description**.
+
+Think of it as:
+
+```txt
+Name = What is this?
+
+Description = Tell me more about it.
+```
+
+## Example
+
+<CodeExample title="aria-describedby" source={AriaDescribedByRaw}>
+  <AriaDescribedBy />
+</CodeExample>
+
+## Accessibility Notes
+
+- Provides additional context.
+- Commonly used for helper text.
+- Commonly used for validation messages.
+- Can reference one or multiple IDs.
+- Does not replace labels.
+
+---
+
+## Helper Text
+
+```html
+<label for="username"> Username </label>
+
+<input id="username" aria-describedby="username-help" />
+
+<p id="username-help">Must be between 4 and 20 characters.</p>
+```
+
+Screen reader:
+
+```txt
+Username
+edit text
+
+Must be between 4 and 20 characters.
+```
+
+Accessible name:
+
+```txt
+Username
+```
+
+Accessible description:
+
+```txt
+Must be between 4 and 20 characters.
+```
+
+---
+
+## Error Message
+
+```html
+<input aria-invalid="true" aria-describedby="email-error" />
+
+<p id="email-error">Please enter a valid email address.</p>
+```
+
+Screen reader:
+
+```txt
+Email
+invalid entry
+
+Please enter a valid email address.
+```
+
+---
+
+## Multiple Descriptions
+
+You can reference multiple IDs.
+
+```html
+<input
+  aria-describedby="
+    password-help
+    password-error
+  "
+/>
+```
+
+```html
+<p id="password-help">Minimum 8 characters.</p>
+
+<p id="password-error">Password is too short.</p>
+```
+
+Screen reader:
+
+```txt
+Minimum 8 characters.
+Password is too short.
+```
+
+Descriptions are announced in the order specified.
+
+---
+
+## aria-describedby vs aria-labelledby
+
+### aria-labelledby
+
+Provides the accessible name.
+
+```html
+<label id="email-label"> Email </label>
+
+<input aria-labelledby="email-label" />
+```
+
+Screen reader:
+
+```txt
+Email
+edit text
+```
+
+---
+
+### aria-describedby
+
+Provides additional information.
+
+```html
+<input aria-labelledby="email-label" aria-describedby="email-help" />
+
+<p id="email-help">We'll never share your email.</p>
+```
+
+Screen reader:
+
+```txt
+Email
+edit text
+
+We'll never share your email.
+```
+
+---
+
+## Common Mistakes
+
+### ❌ Using aria-describedby Instead of a Label
+
+```html
+<input aria-describedby="email-text" />
+
+<p id="email-text">Email Address</p>
+```
+
+Screen readers may announce a description, but the field still lacks a proper accessible name.
+
+---
+
+### ✅ Use a Label
+
+```html
+<label for="email"> Email Address </label>
+
+<input id="email" aria-describedby="email-help" />
+
+<p id="email-help">We'll never share your email.</p>
+```
+
+---
+
+### ❌ Referencing Missing IDs
+
+```html
+<input aria-describedby="missing-id" />
+```
+
+No description will be announced.
+
+---
+
+### ❌ Putting Important Information Only in Placeholder
+
+```html
+<input placeholder="Must be 8+ characters" />
+```
+
+Placeholders are unreliable and may not be announced consistently.
+
+---
+
+### ✅ Use Descriptive Text
+
+```html
+<input aria-describedby="password-help" />
+
+<p id="password-help">Must be at least 8 characters.</p>
+```
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Helper text
+- Validation messages
+- Password requirements
+- Formatting instructions
+- Additional contextual information
+
+Examples:
+
+```txt
+Must be between 4 and 20 characters.
+```
+
+```txt
+Required for account recovery.
+```
+
+```txt
+We'll never share your email.
+```
+
+Avoid using `aria-describedby` as a replacement for labels. A control should still have a proper accessible name.

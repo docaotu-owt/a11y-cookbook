@@ -1,0 +1,76 @@
+---
+title: Table
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { TableGood } from "../../a11y/semantic-html/Table/TableGood.tsx";
+import TableGoodRaw from "../../a11y/semantic-html/Table/TableGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Table
+
+Tables should be used for tabular data, not page layout.
+
+## Good Example
+
+<CodeExample title={"Table example"} source={TableGoodRaw}>
+  <TableGood />
+</CodeExample>
+
+## Bad Example
+
+```html
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Revenue</td>
+  </tr>
+</table>
+```
+
+## Accessibility Notes
+
+- Use `th` for headers.
+- Use `scope="col"` or `scope="row"`.
+- Use `caption` when the table needs context.
+- Do not use tables for layout.
+
+## Screen Reader Output
+
+```txt
+Monthly Revenue table
+
+Column 1: Month
+Column 2: Revenue
+
+January, $10,000
+```
+
+## Common Mistakes
+
+❌ Using td as headers
+
+```html
+<td>Name</td>
+```
+
+✅ Use th
+
+```html
+<th scope="col">Name</th>
+```
+
+❌ Missing caption
+
+```html
+<table></table>
+```
+
+✅ Provide context
+
+```html
+<caption>
+  Monthly Revenue
+</caption>
+```

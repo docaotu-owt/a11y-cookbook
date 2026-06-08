@@ -1,0 +1,344 @@
+---
+title: aria-current
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaCurrent } from "../../a11y/aria/AriaCurrent.tsx";
+import AriaCurrentRaw from "../../a11y/aria/AriaCurrent.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-current
+
+`aria-current` indicates which item represents the current item within a set.
+
+It is most commonly used in:
+
+- Navigation menus
+- Sidebars
+- Breadcrumbs
+- Pagination
+- Step indicators
+
+This helps screen reader users understand their current location.
+
+## Example
+
+<CodeExample title="aria-current" source={AriaCurrentRaw}>
+  <AriaCurrent />
+</CodeExample>
+
+## Accessibility Notes
+
+- Applied only to the current item.
+- Most commonly uses `aria-current="page"`.
+- Screen readers announce the current state.
+- Only one item in a set should typically be marked as current.
+
+---
+
+## Current Page
+
+```html
+<nav aria-label="Documentation">
+  <ul>
+    <li>
+      <a href="/button"> Button </a>
+    </li>
+
+    <li>
+      <a href="/input" aria-current="page"> Input </a>
+    </li>
+
+    <li>
+      <a href="/checkbox"> Checkbox </a>
+    </li>
+  </ul>
+</nav>
+```
+
+Screen reader:
+
+```txt
+Button link
+
+Input link
+current page
+
+Checkbox link
+```
+
+---
+
+## Sidebar Navigation
+
+A common pattern in documentation websites.
+
+```html
+<a href="/button"> Button </a>
+
+<a href="/input" aria-current="page"> Input </a>
+
+<a href="/checkbox"> Checkbox </a>
+```
+
+Screen reader:
+
+```txt
+Input
+current page
+link
+```
+
+Users immediately know where they are.
+
+---
+
+## Breadcrumbs
+
+```html
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li>
+      <a href="/"> Home </a>
+    </li>
+
+    <li>
+      <a href="/forms"> Forms </a>
+    </li>
+
+    <li>
+      <a href="/forms/input" aria-current="page"> Input </a>
+    </li>
+  </ol>
+</nav>
+```
+
+Screen reader:
+
+```txt
+Input
+current page
+link
+```
+
+---
+
+## Pagination
+
+```html
+<nav aria-label="Pagination">
+  <a href="?page=1"> 1 </a>
+
+  <a href="?page=2" aria-current="page"> 2 </a>
+
+  <a href="?page=3"> 3 </a>
+</nav>
+```
+
+Screen reader:
+
+```txt
+2
+current page
+link
+```
+
+---
+
+## Step Indicator
+
+```html
+<ol>
+  <li>Account</li>
+
+  <li aria-current="step">Profile</li>
+
+  <li>Confirmation</li>
+</ol>
+```
+
+Screen reader:
+
+```txt
+Profile
+current step
+```
+
+---
+
+## Supported Values
+
+### Current Page
+
+```html
+aria-current="page"
+```
+
+Used for:
+
+- Navigation menus
+- Sidebars
+- Breadcrumbs
+
+---
+
+### Current Step
+
+```html
+aria-current="step"
+```
+
+Used for:
+
+- Multi-step forms
+- Checkout flows
+- Wizards
+
+---
+
+### Current Location
+
+```html
+aria-current="location"
+```
+
+Used when indicating the current location within a structure.
+
+---
+
+### Boolean Form
+
+```html
+aria-current="true"
+```
+
+Valid, but less descriptive.
+
+Prefer specific values such as:
+
+```html
+aria-current="page"
+```
+
+or
+
+```html
+aria-current="step"
+```
+
+when possible.
+
+---
+
+## aria-current vs aria-selected
+
+These attributes are often confused.
+
+### aria-current
+
+Represents:
+
+```txt
+Where am I?
+```
+
+Example:
+
+```html
+<a href="/input" aria-current="page"> Input </a>
+```
+
+Screen reader:
+
+```txt
+current page
+```
+
+---
+
+### aria-selected
+
+Represents:
+
+```txt
+Which option is selected?
+```
+
+Example:
+
+```html
+<button role="tab" aria-selected="true">Details</button>
+```
+
+Screen reader:
+
+```txt
+selected
+```
+
+Use:
+
+- `aria-current` for navigation and location
+- `aria-selected` for selection widgets such as tabs, listboxes, and grids
+
+---
+
+## Common Mistakes
+
+### ❌ Marking Multiple Pages as Current
+
+```html
+<a href="/button" aria-current="page"> Button </a>
+
+<a href="/input" aria-current="page"> Input </a>
+```
+
+Users cannot determine which page is actually current.
+
+---
+
+### ✅ Mark Only One Current Page
+
+```html
+<a href="/button"> Button </a>
+
+<a href="/input" aria-current="page"> Input </a>
+```
+
+---
+
+### ❌ Using Only Visual Styling
+
+```html
+<a class="active"> Input </a>
+```
+
+Sighted users see the active state, but screen readers receive no indication.
+
+---
+
+### ✅ Combine Styling with aria-current
+
+```html
+<a class="active" aria-current="page"> Input </a>
+```
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Documentation sidebars
+- Site navigation
+- Breadcrumbs
+- Pagination
+- Multi-step forms
+- Checkout progress indicators
+
+Use `aria-current` whenever users need to know:
+
+```txt
+Where am I right now?
+```

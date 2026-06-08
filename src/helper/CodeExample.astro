@@ -1,0 +1,86 @@
+---
+const { source } = Astro.props;
+
+import { Code } from "astro/components";
+
+const id = `code-example`;
+---
+
+<div id={id} class="overflow-hidden rounded-xl border">
+  <div role="tablist" aria-label="Code Example" class="flex border-b">
+    <button
+      type="button"
+      data-tab="preview"
+      aria-selected="true"
+      class="tab-btn border-b-2 border-slate-900 px-4 py-2 font-medium"
+    >
+      Preview
+    </button>
+
+    <button
+      type="button"
+      data-tab="code"
+      aria-selected="false"
+      class="tab-btn border-b-2 border-transparent px-4 py-2"
+    >
+      Code
+    </button>
+  </div>
+
+  <div data-panel="preview" class="p-4">
+    <slot />
+  </div>
+
+  <div data-panel="code" hidden class="relative">
+    <button
+      type="button"
+      data-copy
+      class="absolute right-3 top-3 rounded border px-3 py-0 text-sm hover:bg-slate-100"
+    >
+      Copy
+    </button>
+
+    <div class="overflow-auto p-4">
+      <Code code={source} lang="tsx" />
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ id, source }}>
+const root = document.getElementById(id);
+
+const buttons = root.querySelectorAll("[data-tab]");
+const previewPanel = root.querySelector('[data-panel="preview"]');
+const codePanel = root.querySelector('[data-panel="code"]');
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const tab = button.dataset.tab;
+
+    buttons.forEach((btn) => {
+      const active = btn.dataset.tab === tab;
+
+      btn.setAttribute("aria-selected", String(active));
+
+      btn.classList.toggle("border-slate-900", active);
+
+      btn.classList.toggle("font-medium", active);
+
+      btn.classList.toggle("border-transparent", !active);
+    });
+
+    previewPanel.hidden = tab !== "preview";
+
+    codePanel.hidden = tab !== "code";
+  });
+});
+
+root
+  .querySelector("[data-copy]")
+  ?.addEventListener("click", async (event) => {
+    console.log("HERE");
+    await navigator.clipboard.writeText(source ?? "");
+
+    alert("Copied!");
+  });
+</script>

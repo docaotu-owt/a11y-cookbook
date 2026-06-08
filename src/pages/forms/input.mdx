@@ -1,0 +1,295 @@
+---
+title: Input
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { Default } from "../../a11y/forms/Input/Default.tsx";
+
+import { InputWithDescription } from "../../a11y/forms/Input/InputWithDescription.tsx";
+
+import { InputWithError } from "../../a11y/forms/Input/InputWithError.tsx";
+
+import { InputSuccess } from "../../a11y/forms/Input/InputSuccess.tsx";
+import InputSuccessRaw from "../../a11y/forms/Input/InputSuccess.tsx?raw";
+
+import { InputWithClearButton } from "../../a11y/forms/Input/InputWithClearButton.tsx";
+import InputWithClearButtonRaw from "../../a11y/forms/Input/InputWithClearButton.tsx?raw";
+
+import { InputRequired } from "../../a11y/forms/Input/InputRequired.tsx";
+import InputRequiredRaw from "../../a11y/forms/Input/InputRequired.tsx?raw";
+
+import { InputDisabled } from "../../a11y/forms/Input/InputDisabled.tsx";
+import InputDisabledRaw from "../../a11y/forms/Input/InputDisabled.tsx?raw";
+
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Input
+
+Inputs allow users to enter and edit text.
+
+Accessible inputs should always have a clear label, support keyboard navigation, and provide additional context such as helper text, validation feedback, and error messages when necessary.
+
+---
+
+## Basic Input
+
+<CodeExample
+  title="Basic Input"
+  source={`<label for="email">Name </label>
+<input id="email" type="text" />
+`}
+>
+  <Default />
+</CodeExample>
+
+### Accessibility Notes
+
+- Every input should have an associated label.
+- Labels provide the accessible name announced by screen readers.
+- Avoid relying on placeholders as labels.
+
+Screen reader:
+
+```txt
+Name
+edit text
+```
+
+---
+
+## Input with Description
+
+<CodeExample source={`<label for="email"> User name </label>
+
+<input id="email" aria-describedby="description-id" type="text" />
+
+<p id="description-id">Must be between 4 and 20 characters.</p>`}>
+  <InputWithDescription />
+</CodeExample>
+
+### Accessibility Notes
+
+- Use `aria-describedby` to associate helper text.
+- Additional instructions are announced when the field receives focus.
+
+Screen reader:
+
+```txt
+Username
+edit text
+
+Must be between 4 and 20 characters.
+```
+
+---
+
+## Input with Error Message
+
+<CodeExample source={`<label for="email"> Email </label>
+
+<input
+  id="email"
+  aria-describedby="error-id"
+  aria-invalid="true"
+  type="email"
+/>
+
+<p id="error-id">Please enter a valid email address.</p>`}>
+  <InputWithError />
+</CodeExample>
+
+### Accessibility Notes
+
+- Use `aria-invalid="true"` for invalid fields.
+- Associate the error message using `aria-describedby`.
+- Error messages should explain how to resolve the issue.
+
+Screen reader:
+
+```txt
+Email
+invalid entry
+
+Please enter a valid email address.
+```
+
+---
+
+## Input with Success State
+
+<CodeExample title="Input with Success State" source={InputSuccessRaw}>
+  <InputSuccess />
+</CodeExample>
+
+### Accessibility Notes
+
+- Success icons are usually decorative.
+- Decorative icons should use `aria-hidden="true"`.
+- Avoid announcing purely visual indicators.
+
+❌ Bad
+
+```html
+<span>✓</span>
+```
+
+✅ Good
+
+```html
+<span aria-hidden="true"> ✓ </span>
+```
+
+---
+
+## Input with Clear Button
+
+<CodeExample title="Input with Clear Button" source={InputWithClearButtonRaw}>
+  <InputWithClearButton />
+</CodeExample>
+
+### Accessibility Notes
+
+- Icon-only buttons require an accessible name.
+- Use `aria-label` to describe the button action.
+- Ensure the clear button is keyboard accessible.
+
+❌ Bad
+
+```html
+<button>×</button>
+```
+
+Screen reader:
+
+```txt
+times button
+```
+
+✅ Good
+
+```html
+<button aria-label="Clear search">×</button>
+```
+
+Screen reader:
+
+```txt
+Clear search button
+```
+
+---
+
+## Required Input
+
+<CodeExample title="Required Input" source={InputRequiredRaw}>
+  <InputRequired />
+</CodeExample>
+
+### Accessibility Notes
+
+- Prefer the native `required` attribute.
+- Screen readers automatically announce required fields.
+- Visual indicators such as `*` should not be the only indication that a field is required.
+
+Screen reader:
+
+```txt
+Password
+required
+edit text
+```
+
+---
+
+## Disabled Input
+
+<CodeExample title="Disabled Input" source={InputDisabledRaw}>
+  <InputDisabled />
+</CodeExample>
+
+### Accessibility Notes
+
+- Disabled controls are unavailable for interaction.
+- Disabled inputs cannot receive keyboard focus.
+- Only disable controls when users genuinely cannot interact with them.
+
+Screen reader:
+
+```txt
+Company
+dimmed
+edit text
+```
+
+---
+
+## Keyboard Support
+
+| Key         | Action                           |
+| ----------- | -------------------------------- |
+| Tab         | Move focus to the next field     |
+| Shift + Tab | Move focus to the previous field |
+| Arrow Keys  | Move cursor within the input     |
+| Home        | Move cursor to beginning         |
+| End         | Move cursor to end               |
+| Backspace   | Delete previous character        |
+| Delete      | Delete next character            |
+
+---
+
+## Common Mistakes
+
+### ❌ Using Placeholder as Label
+
+```html
+<input type="email" placeholder="Email Address" />
+```
+
+Problems:
+
+- Placeholder disappears when typing.
+- Often has poor contrast.
+- Not a reliable accessible name.
+
+### ✅ Use a Label
+
+```html
+<label for="email"> Email Address </label>
+
+<input id="email" type="email" />
+```
+
+---
+
+### ❌ Error Message Not Associated
+
+```html
+<input />
+
+<p>Invalid email address</p>
+```
+
+Screen readers may not announce the error.
+
+### ✅ Associate Error Message
+
+```html
+<input aria-invalid="true" aria-describedby="email-error" />
+
+<p id="email-error">Invalid email address</p>
+```
+
+---
+
+### ❌ Icon Button Without Accessible Name
+
+```html
+<button>🔍</button>
+```
+
+### ✅ Provide an Accessible Name
+
+```html
+<button aria-label="Search">🔍</button>
+```

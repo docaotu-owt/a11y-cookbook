@@ -1,0 +1,40 @@
+---
+title: Button
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { ButtonGood } from "../../a11y/semantic-html/Button/ButtonGood.tsx";
+import ButtonGoodRaw from "../../a11y/semantic-html/Button/ButtonGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Button
+
+Buttons trigger actions.
+
+## Good Example
+
+<CodeExample title={"Button example"} source={ButtonGoodRaw}>
+  <ButtonGood />
+</CodeExample>
+
+## Bad Example
+
+```
+<div onClick={() => {}}>
+    Save
+</div>
+```
+
+## Accessibility Notes
+
+- Use native button elements
+- Don't use div + onClick
+
+## Keyboard Support
+
+| Key   | Action       |
+| ----- | ------------ |
+| Tab   | Focus button |
+| Enter | Activate     |
+| Space | Activate     |

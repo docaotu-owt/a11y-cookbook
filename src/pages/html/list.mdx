@@ -1,0 +1,117 @@
+---
+title: List
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { ListGood } from "../../a11y/semantic-html/List/ListGood.tsx";
+import ListGoodRaw from "../../a11y/semantic-html/List/ListGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# List
+
+Lists represent a collection of related items.
+
+Using semantic list elements helps screen reader users understand the structure and number of items in a group.
+
+## Good Example
+
+<CodeExample title={"List example"} source={ListGoodRaw}>
+  {" "}
+  <ListGood />{" "}
+</CodeExample>
+
+## Bad Example
+
+```tsx
+<div>• Chrome</div>
+<div>• Firefox</div>
+<div>• Safari</div>
+```
+
+## Accessibility Notes
+
+- Use `ul` for unordered collections.
+- Use `ol` for ordered or step-by-step content.
+- Use `li` for each list item.
+- Avoid using plain divs to visually imitate lists.
+- Screen readers announce the number of items in a list.
+
+## Keyboard Support
+
+Lists are not interactive by default.
+
+Users navigate list content using standard reading commands or screen reader navigation commands.
+
+## Screen Reader Output
+
+```txt
+List with 3 items
+
+• Chrome
+• Firefox
+• Safari
+```
+
+## Common Mistakes
+
+❌ Using divs instead of a list
+
+```html
+<div>Chrome</div>
+<div>Firefox</div>
+<div>Safari</div>
+```
+
+✅ Use semantic list markup
+
+```html
+<ul>
+  <li>Chrome</li>
+  <li>Firefox</li>
+  <li>Safari</li>
+</ul>
+```
+
+❌ Using manual numbering
+
+```html
+<p>1. Create account</p>
+<p>2. Verify email</p>
+<p>3. Sign in</p>
+```
+
+✅ Use an ordered list
+
+```html
+<ol>
+  <li>Create account</li>
+  <li>Verify email</li>
+  <li>Sign in</li>
+</ol>
+```
+
+## When to Use
+
+Use a list when displaying:
+
+- Navigation links
+- Feature lists
+- Requirements
+- Steps in a process
+- Collections of related content
+
+## When Not to Use
+
+Do not use a list solely for layout purposes.
+
+```html
+<ul class="grid">
+  ...
+</ul>
+```
+
+is acceptable only when the content is still conceptually a list.
+
+If the content is purely layout-related, use more appropriate structural elements instead.
+:::

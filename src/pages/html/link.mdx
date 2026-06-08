@@ -1,0 +1,71 @@
+---
+title: Link
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { LinkGood } from "../../a11y/semantic-html/Link/LinkGood.tsx";
+import LinkGoodRaw from "../../a11y/semantic-html/Link/LinkGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Link
+
+Links navigate users to another page, section, or resource.
+
+## Good Example
+
+<CodeExample title={"Link example"} source={LinkGoodRaw}>
+  <LinkGood />
+</CodeExample>
+
+## Bad Example
+
+```tsx
+<div onClick={() => navigate("/about")}>About Us</div>
+```
+
+## Accessibility Notes
+
+- Use `<a>` for navigation.
+- Provide meaningful link text.
+- Links should indicate destination or purpose.
+- Avoid using buttons for navigation.
+
+## Keyboard Support
+
+| Key   | Action        |
+| ----- | ------------- |
+| Tab   | Focus link    |
+| Enter | Activate link |
+
+## Screen Reader Output
+
+```txt
+About Us, link
+```
+
+## Common Mistakes
+
+❌ Generic text
+
+```html
+<a href="/pricing">Click here</a>
+```
+
+✅ Descriptive text
+
+```html
+<a href="/pricing">View pricing plans</a>
+```
+
+❌ Using a div as a link
+
+```html
+<div onclick="location.href='/about'">About</div>
+```
+
+✅ Use an anchor element
+
+```html
+<a href="/about"> About </a>
+```

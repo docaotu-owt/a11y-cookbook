@@ -1,0 +1,161 @@
+---
+title: aria-label
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaLabel } from "../../a11y/aria/AriaLabel.tsx";
+import AriaLabelRaw from "../../a11y/aria/AriaLabel.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-label
+
+`aria-label` provides an accessible name for an element when a visible text label is unavailable.
+
+It is commonly used for icon-only buttons, custom controls, and landmarks.
+
+## Example
+
+<CodeExample title="aria-label" source={AriaLabelRaw}>
+  <AriaLabel />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use when no visible label exists.
+- Prefer visible text whenever possible.
+- Screen readers announce the value of `aria-label` as the accessible name.
+
+---
+
+## Icon Button
+
+❌ Bad
+
+```html
+<button>✕</button>
+```
+
+Screen reader:
+
+```txt
+button
+```
+
+or
+
+```txt
+multiplication sign button
+```
+
+✅ Good
+
+```html
+<button aria-label="Close dialog">✕</button>
+```
+
+Screen reader:
+
+```txt
+Close dialog button
+```
+
+---
+
+## Search Button
+
+❌ Bad
+
+```html
+<button>🔍</button>
+```
+
+✅ Good
+
+```html
+<button aria-label="Search">🔍</button>
+```
+
+Screen reader:
+
+```txt
+Search button
+```
+
+---
+
+## Input Without Visible Label
+
+Sometimes a search field intentionally omits a visible label.
+
+```html
+<input type="search" aria-label="Search products" />
+```
+
+Screen reader:
+
+```txt
+Search products
+search text field
+```
+
+---
+
+## Common Mistakes
+
+### ❌ Using aria-label When Visible Text Already Exists
+
+```html
+<button aria-label="Save changes">Save</button>
+```
+
+Screen readers announce:
+
+```txt
+Save changes button
+```
+
+while sighted users see:
+
+```txt
+Save
+```
+
+This creates inconsistency.
+
+### ✅ Prefer Visible Text
+
+```html
+<button>Save</button>
+```
+
+---
+
+### ❌ Replacing Native Labels
+
+```html
+<input aria-label="Email" />
+```
+
+when a visible label exists:
+
+```html
+<label for="email"> Email </label>
+
+<input id="email" />
+```
+
+Prefer the label element whenever possible.
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Icon buttons
+- Search buttons
+- Close buttons
+- Custom controls without visible text
+
+Avoid using `aria-label` when a visible label already exists.

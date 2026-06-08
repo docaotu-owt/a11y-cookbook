@@ -1,0 +1,237 @@
+---
+title: Textarea
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { Textarea } from "../../a11y/forms/Textarea/Textarea.tsx";
+import TextareaRaw from "../../a11y/forms/Textarea/Textarea.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Textarea
+
+A textarea allows users to enter multi-line text.
+
+Use a textarea when users need to enter longer content such as comments, feedback, descriptions, or messages.
+
+## Example
+
+<CodeExample title="Textarea" source={TextareaRaw}>
+  <Textarea />
+</CodeExample>
+
+## Accessibility Notes
+
+- Every textarea should have an associated label.
+- Use `aria-describedby` for helper text and validation messages.
+- Use `aria-invalid` when validation fails.
+- Prefer labels over placeholders.
+
+---
+
+## Basic Textarea
+
+```html
+<label for="comment"> Comment </label>
+
+<textarea id="comment" rows="4"></textarea>
+```
+
+Screen reader:
+
+```txt
+Comment
+multi-line text field
+```
+
+---
+
+## Textarea with Description
+
+```html
+<label for="bio"> Bio </label>
+
+<textarea id="bio" aria-describedby="bio-help"></textarea>
+
+<p id="bio-help">Maximum 500 characters.</p>
+```
+
+Screen reader:
+
+```txt
+Bio
+multi-line text field
+
+Maximum 500 characters.
+```
+
+---
+
+## Required Textarea
+
+```html
+<label for="feedback"> Feedback </label>
+
+<textarea id="feedback" required></textarea>
+```
+
+Screen reader:
+
+```txt
+Feedback
+required
+multi-line text field
+```
+
+---
+
+## Textarea with Error
+
+```html
+<label for="feedback"> Feedback </label>
+
+<textarea
+  id="feedback"
+  aria-invalid="true"
+  aria-describedby="feedback-error"
+></textarea>
+
+<p id="feedback-error">Feedback is required.</p>
+```
+
+Screen reader:
+
+```txt
+Feedback
+invalid entry
+
+Feedback is required.
+```
+
+---
+
+## Character Counter
+
+Character counters should provide additional information without replacing labels.
+
+```html
+<label for="bio"> Bio </label>
+
+<textarea id="bio" aria-describedby="bio-count"></textarea>
+
+<p id="bio-count">120 of 500 characters used.</p>
+```
+
+Screen reader:
+
+```txt
+Bio
+multi-line text field
+
+120 of 500 characters used.
+```
+
+---
+
+## Keyboard Support
+
+Textareas support all standard text editing shortcuts.
+
+| Key         | Action                         |
+| ----------- | ------------------------------ |
+| Tab         | Move focus                     |
+| Shift + Tab | Move focus to previous element |
+| Arrow Keys  | Move cursor                    |
+| Home        | Beginning of line              |
+| End         | End of line                    |
+| Enter       | New line                       |
+
+---
+
+## Common Mistakes
+
+### ❌ Placeholder as Label
+
+```html
+<textarea placeholder="Comment"></textarea>
+```
+
+Problems:
+
+- Placeholder disappears while typing.
+- Often has low contrast.
+- Does not replace a label.
+
+---
+
+### ✅ Use a Label
+
+```html
+<label for="comment"> Comment </label>
+
+<textarea id="comment"></textarea>
+```
+
+---
+
+### ❌ Missing Label
+
+```html
+<textarea></textarea>
+```
+
+Screen readers may not announce a meaningful name.
+
+---
+
+### ✅ Associated Label
+
+```html
+<label for="comment"> Comment </label>
+
+<textarea id="comment"></textarea>
+```
+
+---
+
+### ❌ Error Message Not Associated
+
+```html
+<textarea></textarea>
+
+<p>Feedback is required.</p>
+```
+
+Screen readers may not announce the error.
+
+---
+
+### ✅ Associate Error Message
+
+```html
+<textarea aria-invalid="true" aria-describedby="feedback-error"></textarea>
+
+<p id="feedback-error">Feedback is required.</p>
+```
+
+---
+
+## When to Use
+
+Use a textarea when users need to enter multiple lines of text.
+
+Examples:
+
+- Comments
+- Feedback
+- Support requests
+- Product descriptions
+- User biographies
+
+Avoid using a textarea for short, single-line values such as:
+
+- First name
+- Email
+- Phone number
+
+For those cases, use a standard input instead.

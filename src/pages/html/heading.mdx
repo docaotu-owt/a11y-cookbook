@@ -1,0 +1,72 @@
+---
+title: Heading
+category: HTML
+layout: ../../layouts/Layout.astro
+---
+
+import { HeadingGood } from "../../a11y/semantic-html/Heading/HeadingGood.tsx";
+import HeadingGoodRaw from "../../a11y/semantic-html/Heading/HeadingGood.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Heading
+
+Headings provide structure and allow screen reader users to navigate content efficiently.
+
+## Good Example
+
+<CodeExample title={"Heading example"} source={HeadingGoodRaw}>
+  <HeadingGood />
+</CodeExample>
+
+## Bad Example
+
+```tsx
+<div className="text-3xl font-bold">Account Settings</div>
+```
+
+## Accessibility Notes
+
+- Use semantic heading elements (`h1`–`h6`).
+- Do not skip heading levels unnecessarily.
+- Pages should typically have a single `h1`.
+- Headings create a document outline for assistive technologies.
+
+## Keyboard Support
+
+Headings are not interactive.
+
+However, screen reader users can navigate directly between headings.
+
+## Screen Reader Output
+
+```txt
+Heading level 1, Account Settings
+```
+
+## Common Mistakes
+
+❌ Styling a div to look like a heading
+
+```html
+<div class="title">Account Settings</div>
+```
+
+✅ Use a semantic heading
+
+```html
+<h1>Account Settings</h1>
+```
+
+❌ Skipping heading levels
+
+```html
+<h1>Settings</h1>
+<h4>Profile</h4>
+```
+
+✅ Use logical hierarchy
+
+```html
+<h1>Settings</h1>
+<h2>Profile</h2>
+```

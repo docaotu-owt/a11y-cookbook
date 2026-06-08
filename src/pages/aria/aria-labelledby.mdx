@@ -1,0 +1,208 @@
+---
+title: aria-labelledby
+category: ARIA
+layout: ../../layouts/Layout.astro
+---
+
+import { AriaLabelledBy } from "../../a11y/aria/AriaLabelledBy.tsx";
+import AriaLabelledByRaw from "../../a11y/aria/AriaLabelledBy.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# aria-labelledby
+
+`aria-labelledby` allows an element to derive its accessible name from one or more existing elements on the page.
+
+Unlike `aria-label`, the label text is not duplicated inside the attribute. Instead, it references existing content by ID.
+
+## Example
+
+<CodeExample title="aria-labelledby" source={AriaLabelledByRaw}>
+  <AriaLabelledBy />
+</CodeExample>
+
+## Accessibility Notes
+
+- Uses existing visible content as the accessible name.
+- Preferred over `aria-label` when a visible label already exists.
+- Multiple IDs can be combined.
+- IDs are announced in the order they appear in the attribute.
+
+---
+
+## Basic Example
+
+```html
+<h2 id="dialog-title">Delete Account</h2>
+
+<button aria-labelledby="dialog-title">Delete</button>
+```
+
+Screen reader:
+
+```txt
+Delete Account button
+```
+
+The button derives its accessible name from the heading.
+
+---
+
+## Multiple Labels
+
+```html
+<span id="shutdown-label"> Shutdown in </span>
+
+<span id="shutdown-time"> 10 </span>
+
+<span id="shutdown-unit"> minutes </span>
+
+<button
+  aria-labelledby="
+    shutdown-label
+    shutdown-time
+    shutdown-unit
+  "
+>
+  Start
+</button>
+```
+
+Screen reader:
+
+```txt
+Shutdown in 10 minutes button
+```
+
+The IDs are announced in the order specified:
+
+```html
+aria-labelledby=" shutdown-label shutdown-time shutdown-unit "
+```
+
+---
+
+## Dialog Title
+
+A common pattern is using the dialog title as the accessible name.
+
+```html
+<div role="dialog" aria-labelledby="dialog-title">
+  <h2 id="dialog-title">Settings</h2>
+
+  ...
+</div>
+```
+
+Screen reader:
+
+```txt
+Settings dialog
+```
+
+---
+
+## Form Group
+
+```html
+<fieldset aria-labelledby="contact-heading">
+  <legend id="contact-heading">Contact Preferences</legend>
+
+  ...
+</fieldset>
+```
+
+Screen reader:
+
+```txt
+Contact Preferences group
+```
+
+---
+
+## aria-labelledby vs aria-label
+
+### aria-label
+
+```html
+<button aria-label="Close dialog">✕</button>
+```
+
+Accessible name:
+
+```txt
+Close dialog
+```
+
+Label text is stored inside the attribute.
+
+---
+
+### aria-labelledby
+
+```html
+<h2 id="close-label">Close dialog</h2>
+
+<button aria-labelledby="close-label">✕</button>
+```
+
+Accessible name:
+
+```txt
+Close dialog
+```
+
+Label text comes from existing content.
+
+---
+
+## Common Mistakes
+
+### ❌ Referencing a Missing ID
+
+```html
+<button aria-labelledby="missing-id">Delete</button>
+```
+
+No accessible name will be found.
+
+---
+
+### ❌ Using IDs in the Wrong Order
+
+```html
+aria-labelledby=" shutdown-unit shutdown-time shutdown-label "
+```
+
+Screen reader:
+
+```txt
+minutes 10 Shutdown in
+```
+
+The order of IDs matters.
+
+---
+
+### ❌ Duplicating Labels
+
+```html
+<label id="email-label"> Email </label>
+
+<input aria-label="Email" aria-labelledby="email-label" />
+```
+
+Avoid mixing naming techniques unless necessary.
+
+---
+
+## When to Use
+
+Good candidates:
+
+- Dialog titles
+- Modal headers
+- Form groups
+- Complex labels composed from multiple elements
+- Existing visible text already present on the page
+
+Prefer `aria-labelledby` over `aria-label` whenever a visible label already exists.

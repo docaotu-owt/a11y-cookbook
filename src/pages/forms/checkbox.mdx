@@ -1,0 +1,228 @@
+---
+title: Checkbox
+category: Forms
+layout: ../../layouts/Layout.astro
+---
+
+import { BaseCheckbox } from "../../a11y/forms/Checkbox/BaseCheckbox.tsx";
+import BaseCheckboxRaw from "../../a11y/forms/Checkbox/BaseCheckbox.tsx?raw";
+
+import { CheckboxGroup } from "../../a11y/forms/Checkbox/CheckboxGroup.tsx";
+import CheckboxGroupRaw from "../../a11y/forms/Checkbox/CheckboxGroup.tsx?raw";
+
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Checkbox
+
+Checkboxes allow users to select one or more independent options.
+
+Unlike radio buttons, multiple checkboxes within the same group can be selected simultaneously.
+
+---
+
+## Basic Checkbox
+
+<CodeExample title="Basic Checkbox" source={BaseCheckboxRaw}>
+  <BaseCheckbox id="newsletter" label="Subscribe to newsletter" />
+</CodeExample>
+
+### Accessibility Notes
+
+- Always associate a label with the checkbox.
+- Clicking the label should toggle the checkbox.
+
+Screen reader:
+
+```txt
+Subscribe to newsletter
+checkbox
+not checked
+```
+
+---
+
+## Checkbox with Description
+
+<CodeExample title="Checkbox with Description" source={`<div className="flex items-start gap-2">
+    <input
+        id={id}
+        type="checkbox"
+        defaultChecked={defaultChecked}
+        aria-describedby={descriptionId || undefined}
+        className="mt-1"
+    />
+    <label htmlFor={id}>{label}</label>
+    <p id={descriptionId} className="ml-6 mt-1 text-sm text-slate-600">
+        {description}
+    </p>
+</div>`}>
+
+  <BaseCheckbox
+    id="marketing"
+    label="Receive marketing emails"
+    description="We may occasionally send product updates and offers."
+  />
+</CodeExample>
+
+### Accessibility Notes
+
+- Use `aria-describedby` for additional context.
+- Descriptions are announced by screen readers.
+
+Screen reader:
+
+```txt
+Receive marketing emails
+checkbox
+
+We may occasionally send product updates and offers.
+```
+
+---
+
+## Required Checkbox
+
+<CodeExample title="Required Checkbox" source={`<div className="flex items-start gap-2">
+    <input
+          id={id}
+          type="checkbox"
+          required={required}
+          defaultChecked={defaultChecked}
+          className="mt-1"
+    />
+    <label htmlFor={id}>{label}</label>
+</div>`}>
+
+  <BaseCheckbox
+    id="terms"
+    label="I agree to the Terms and Conditions"
+    required
+  />
+</CodeExample>
+
+### Accessibility Notes
+
+- Commonly used for Terms and Conditions.
+- Use the native `required` attribute.
+
+Screen reader:
+
+```txt
+I agree to the Terms and Conditions
+required
+checkbox
+```
+
+---
+
+## Checkbox with Error
+
+<CodeExample
+  title="Checkbox with Error"
+  source={`<div className="flex items-start gap-2">
+    <input
+        id={id}
+        type="checkbox"
+        defaultChecked={defaultChecked}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={errorId || undefined}
+        className="mt-1"
+    />
+    <label htmlFor={id}>{label}</label>
+    <p id={errorId} className="ml-6 mt-1 text-sm text-red-600">
+        {error}
+    </p>
+</div>`}
+>
+  <BaseCheckbox
+    id="privacy"
+    label="I accept the Privacy Policy"
+    error="You must accept the Privacy Policy before continuing."
+  />
+</CodeExample>
+
+### Accessibility Notes
+
+- Use `aria-invalid="true"` when validation fails.
+- Associate the error message with `aria-describedby`.
+
+Screen reader:
+
+```txt
+I accept the Privacy Policy
+invalid
+
+You must accept the Privacy Policy before continuing.
+```
+
+---
+
+## Checkbox Group
+
+<CodeExample title="Checkbox Group" source={CheckboxGroupRaw}>
+  <CheckboxGroup />
+</CodeExample>
+
+### Accessibility Notes
+
+- Use `fieldset` to group related checkboxes.
+- Use `legend` to provide a group label.
+
+Screen reader:
+
+```txt
+Preferred Contact Methods
+group
+```
+
+---
+
+## Keyboard Support
+
+| Key         | Action                         |
+| ----------- | ------------------------------ |
+| Tab         | Move focus to checkbox         |
+| Space       | Toggle checkbox                |
+| Shift + Tab | Move focus to previous control |
+
+---
+
+## Common Mistakes
+
+### ❌ Checkbox Without Label
+
+```html
+<input type="checkbox" />
+```
+
+Screen readers have no meaningful name to announce.
+
+### ✅ Associated Label
+
+```html
+<input id="newsletter" type="checkbox" />
+
+<label for="newsletter"> Subscribe to newsletter </label>
+```
+
+---
+
+### ❌ Using Multiple Checkboxes Without Grouping
+
+```html
+<input type="checkbox" />
+<input type="checkbox" />
+<input type="checkbox" />
+```
+
+Users may not understand the relationship between options.
+
+### ✅ Use Fieldset and Legend
+
+```html
+<fieldset>
+  <legend>Preferred Contact Methods</legend>
+
+  ...
+</fieldset>
+```
