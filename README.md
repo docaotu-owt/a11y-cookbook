@@ -1,47 +1,139 @@
-# Astro Starter Kit: Basics
+# Accessibility (a11y) Cookbook
 
-```sh
-npm create astro@latest -- --template basics
+An interactive cookbook for learning and practicing web accessibility (a11y) concepts through real-world examples, code snippets, and hands-on exercises.
+
+## 📖 About
+
+The Accessibility Cookbook helps developers understand and implement accessible web applications by providing practical examples of common UI patterns and accessibility techniques.
+
+Whether you're new to accessibility or looking to improve your existing knowledge, this project offers concise explanations, implementation guides, and best practices.
+
+## 🎯 Learning Goals
+
+Learn and practice:
+
+- Semantic HTML
+- Keyboard Navigation
+- Accessible Forms
+- ARIA Attributes
+- Focus Management
+- Accessible Component Patterns
+- Accessibility Testing and Auditing
+
+## 📚 Cookbook Sections
+
+### Accessibility Fundamentals
+
+- What is Accessibility (a11y)?
+- Why Accessibility Matters
+- Who Benefits from Accessibility
+- Accessibility Standards and Guidelines
+
+### Semantic HTML
+
+Learn how to use the correct HTML elements and understand their accessibility benefits.
+
+Examples include:
+
+- Headings
+- Buttons
+- Links
+- Images
+- Lists
+- Tables
+- Landmarks
+
+### Forms
+
+Build accessible forms using:
+
+- Labels
+- Inputs
+- Textareas
+- Selects
+- Checkboxes
+- Radio Buttons
+- Error Messages
+- Validation Feedback
+
+### Keyboard Navigation
+
+Learn how users interact with websites using only a keyboard.
+
+Topics include:
+
+- Tab Order
+- Focus Indicators
+- Skip Links
+- Keyboard Shortcuts
+
+### ARIA
+
+Understand when and how to use ARIA.
+
+Examples include:
+
+- aria-label
+- aria-labelledby
+- aria-describedby
+- aria-expanded
+- aria-live
+
+### Accessible Components
+
+Common UI patterns with accessibility built in:
+
+- Modal Dialogs
+- Accordions
+- Tabs
+- Dropdown Menus
+- Tooltips
+- Navigation Menus
+
+### Focus Management
+
+Learn how to manage focus for interactive applications.
+
+Examples include:
+
+- Focus Trapping
+- Returning Focus
+- Programmatic Focus
+
+### Testing & Auditing
+
+Tools and techniques for evaluating accessibility:
+
+- Keyboard Testing
+- Screen Reader Testing
+- Lighthouse
+- axe DevTools
+- Browser Accessibility Tree
+
+## 🚀 Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Open your browser and navigate to:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+http://localhost:4321
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠️ Tech Stack
 
-## 🧞 Commands
+- Astro
+- React
+- TypeScript
+- Accessibility Testing Tools
 
-All commands are run from the root of the project, from a terminal:
+## 🤝 Contributing
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Contributions are welcome. Feel free to submit issues, improvements, or additional accessibility examples.
 
-## 👀 Want to learn more?
+## 📜 License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-# a11y-cookbook
+MIT License
