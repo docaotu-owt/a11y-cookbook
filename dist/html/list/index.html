@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.4.2"><title>A11y cookbook</title><link rel="stylesheet" href="/_astro/Layout.-WehGbfE.css"></head> <body class="h-screen overflow-hidden" data-astro-cid-sckkx6r4> <div class="flex h-full" data-astro-cid-sckkx6r4> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(c,s,d)=>s in c?g(c,s,{enumerable:!0,configurable:!0,writable:!0,value:d}):c[s]=d;var l=(c,s,d)=>w(c,typeof s!="symbol"?s+"":s,d);var E=new Set(["__proto__","constructor","prototype"]);{let c={0:t=>y(t),1:t=>d(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(d(t)),5:t=>new Set(d(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in c?c[p](e):void 0},d=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),r={},i=this.querySelectorAll("template[data-astro-template]");for(let o of i){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of n){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let a=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(a+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${a}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,r,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),n.disconnect(),this.childrenConnectedCallback()},n=new MutationObserver(()=>{var r;((r=this.lastChild)==null?void 0:r.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});n.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let n=new URL(e,document.baseURI),r=`astro-retry=${Date.now()}`,i=n.hash.replace(/^#/,"");return n.hash=i?`${i}&${r}`:r,n.toString()}async importWithRetry(e){try{return await import(e)}catch(n){return await new Promise(r=>setTimeout(r,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let n=this.getAttribute("component-url"),r=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:n}});this.dispatchEvent(r)&&console.error(`[astro-island] Error hydrating ${n}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}try{await Astro[n](async()=>{let r=this.getAttribute("renderer-url");try{let[i,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),r?this.importWithRetry(r):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=i;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=i[h]}return this.hydrator=u,this.hydrate}catch(i){return this.handleHydrationError(i),()=>{}}},e,this)}catch(r){this.handleHydrationError(r)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="Z2ojAYv" prefix="r2" component-url="/_astro/Sidebar.D9CRW5Es.js" component-export="Sidebar" renderer-url="/_astro/client.C1Zt6RQO.js" props="{&quot;pathname&quot;:[0,&quot;/html/list/&quot;],&quot;data-astro-cid-sckkx6r4&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;Sidebar&quot;,&quot;value&quot;:true}" await-children><aside class="
+        h-screen
+        w-72
+        shrink-0
+        overflow-y-auto
+        border-r
+        bg-white
+        p-6
+      "><h1 class="p-4 text-3xl">A11y Cookbook</h1><nav aria-label="Accessibility Cookbook Navigation"><ul class="space-y-4"><li><a href="/" class="
+                      block
+                      rounded-md
+                      px-3
+                      py-2
+                      text-sm
+                      transition-colors
+                      focus-visible:outline
+                      focus-visible:outline-offset-2
+                      hover:bg-slate-100
+                    ">Overview</a><ul id="section-panel-Overview" aria-labelledby="section-button-Overview" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "></ul></li><li><a href="/how-to-test" class="
+                      block
+                      rounded-md
+                      px-3
+                      py-2
+                      text-sm
+                      transition-colors
+                      focus-visible:outline
+                      focus-visible:outline-offset-2
+                      hover:bg-slate-100
+                    ">How to test ?</a><ul id="section-panel-How to test ?" aria-labelledby="section-button-How to test ?" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "></ul></li><li><button id="section-button-Semantic HTML" type="button" aria-expanded="false" aria-controls="section-panel-Semantic HTML" class="
+                    flex
+                    w-full
+                    items-center
+                    justify-between
+                    rounded-md
+                    px-2
+                    py-2
+                    text-left
+                    text-sm
+                    font-semibold
+                    hover:bg-slate-100
+                    focus-visible:outline
+                    focus-visible:outline-offset-2
+                  "><span>Semantic HTML</span><span aria-hidden="true" class="transition-transform ">▶</span></button><ul id="section-panel-Semantic HTML" aria-labelledby="section-button-Semantic HTML" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "><li><a href="/html/button" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Button</a></li><li><a href="/html/link" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Link</a></li><li><a href="/html/heading" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Heading</a></li><li><a href="/html/image" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Image</a></li><li><a href="/html/table" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Table</a></li><li><a href="/html/list" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">List</a></li><li><a href="/html/playground" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Playground</a></li></ul></li><li><button id="section-button-Forms" type="button" aria-expanded="false" aria-controls="section-panel-Forms" class="
+                    flex
+                    w-full
+                    items-center
+                    justify-between
+                    rounded-md
+                    px-2
+                    py-2
+                    text-left
+                    text-sm
+                    font-semibold
+                    hover:bg-slate-100
+                    focus-visible:outline
+                    focus-visible:outline-offset-2
+                  "><span>Forms</span><span aria-hidden="true" class="transition-transform ">▶</span></button><ul id="section-panel-Forms" aria-labelledby="section-button-Forms" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "><li><a href="/forms/label" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Label</a></li><li><a href="/forms/input" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Input</a></li><li><a href="/forms/textarea" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Textarea</a></li><li><a href="/forms/content-editable" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Content Editable</a></li><li><a href="/forms/checkbox" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Checkbox</a></li><li><a href="/forms/radio-group" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Radio Group</a></li><li><a href="/forms/switch" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Switch</a></li></ul></li><li><button id="section-button-ARIA" type="button" aria-expanded="false" aria-controls="section-panel-ARIA" class="
+                    flex
+                    w-full
+                    items-center
+                    justify-between
+                    rounded-md
+                    px-2
+                    py-2
+                    text-left
+                    text-sm
+                    font-semibold
+                    hover:bg-slate-100
+                    focus-visible:outline
+                    focus-visible:outline-offset-2
+                  "><span>ARIA</span><span aria-hidden="true" class="transition-transform ">▶</span></button><ul id="section-panel-ARIA" aria-labelledby="section-button-ARIA" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "><li><a href="/aria/aria-label" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-label</a></li><li><a href="/aria/aria-labelledby" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-labelledby</a></li><li><a href="/aria/aria-describedby" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-describedby</a></li><li><a href="/aria/aria-expanded" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-expanded</a></li><li><a href="/aria/aria-current" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-current</a></li><li><a href="/aria/aria-live" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">aria-live</a></li></ul></li><li><button id="section-button-Components" type="button" aria-expanded="false" aria-controls="section-panel-Components" class="
+                    flex
+                    w-full
+                    items-center
+                    justify-between
+                    rounded-md
+                    px-2
+                    py-2
+                    text-left
+                    text-sm
+                    font-semibold
+                    hover:bg-slate-100
+                    focus-visible:outline
+                    focus-visible:outline-offset-2
+                  "><span>Components</span><span aria-hidden="true" class="transition-transform ">▶</span></button><ul id="section-panel-Components" aria-labelledby="section-button-Components" hidden="" class="
+                    mt-1
+                    ml-2
+                    space-y-1
+                    border-l
+                    pl-3
+                  "><li><a href="/components/modal" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Modal</a></li><li><a href="/components/accordion" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Accordion</a></li><li><a href="/components/tabs" class="
+                              block
+                              rounded-md
+                              px-3
+                              py-2
+                              text-sm
+                              transition-colors
+                              focus-visible:outline
+                              focus-visible:outline-offset-2
+                              hover:bg-slate-100
+                            ">Tabs</a></li></ul></li></ul></nav></aside><!--astro:end--></astro-island> <main id="main-content" class="flex-1 overflow-y-auto p-6 prose prose-slate max-w-none" data-astro-cid-sckkx6r4> <h1 id="list">List</h1>
+<p>Lists represent a collection of related items.</p>
+<p>Using semantic list elements helps screen reader users understand the structure and number of items in a group.</p>
+<h2 id="good-example">Good Example</h2>
+<div id="code-example" class="overflow-hidden rounded-xl border"> <div role="tablist" aria-label="Code Example" class="flex border-b"> <button type="button" data-tab="preview" aria-selected="true" class="tab-btn border-b-2 border-slate-900 px-4 py-2 font-medium">
+Preview
+</button> <button type="button" data-tab="code" aria-selected="false" class="tab-btn border-b-2 border-transparent px-4 py-2">
+Code
+</button> </div> <div data-panel="preview" class="p-4">  <div class="flex flex-col"><h3 class="mb-2 font-medium">Supported Browsers</h3><ul class="list-disc pl-6"><li>Chrome</li><li>Firefox</li><li>Safari</li></ul></div>  </div> <div data-panel="code" hidden class="relative"> <button type="button" data-copy class="absolute right-3 top-3 rounded border px-3 py-0 text-sm hover:bg-slate-100">
+Copy
+</button> <div class="overflow-auto p-4"> <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> ListGood</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"flex flex-col"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">h3</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"mb-2 font-medium"</span><span style="color:#E1E4E8">>Supported Browsers&#x3C;/</span><span style="color:#85E89D">h3</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">ul</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"list-disc pl-6"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">>Chrome&#x3C;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">>Firefox&#x3C;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">>Safari&#x3C;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">ul</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> </div> </div> <script>(function(){const id = "code-example";
+const source = "export function ListGood() {\n  return (\n    \u003cdiv className=\"flex flex-col\">\n      \u003ch3 className=\"mb-2 font-medium\">Supported Browsers\u003c/h3>\n\n      \u003cul className=\"list-disc pl-6\">\n        \u003cli>Chrome\u003c/li>\n        \u003cli>Firefox\u003c/li>\n        \u003cli>Safari\u003c/li>\n      \u003c/ul>\n    \u003c/div>\n  );\n}\n";
+
+const root = document.getElementById(id);
+
+const buttons = root.querySelectorAll("[data-tab]");
+const previewPanel = root.querySelector('[data-panel="preview"]');
+const codePanel = root.querySelector('[data-panel="code"]');
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const tab = button.dataset.tab;
+
+    buttons.forEach((btn) => {
+      const active = btn.dataset.tab === tab;
+
+      btn.setAttribute("aria-selected", String(active));
+
+      btn.classList.toggle("border-slate-900", active);
+
+      btn.classList.toggle("font-medium", active);
+
+      btn.classList.toggle("border-transparent", !active);
+    });
+
+    previewPanel.hidden = tab !== "preview";
+
+    codePanel.hidden = tab !== "code";
+  });
+});
+
+root
+  .querySelector("[data-copy]")
+  ?.addEventListener("click", async (event) => {
+    console.log("HERE");
+    await navigator.clipboard.writeText(source ?? "");
+
+    alert("Copied!");
+  });
+})();</script>
+<h2 id="bad-example">Bad Example</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;• Chrome&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;• Firefox&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;• Safari&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<h2 id="accessibility-notes">Accessibility Notes</h2>
+<ul>
+<li>Use <code>ul</code> for unordered collections.</li>
+<li>Use <code>ol</code> for ordered or step-by-step content.</li>
+<li>Use <code>li</code> for each list item.</li>
+<li>Avoid using plain divs to visually imitate lists.</li>
+<li>Screen readers announce the number of items in a list.</li>
+</ul>
+<h2 id="keyboard-support">Keyboard Support</h2>
+<p>Lists are not interactive by default.</p>
+<p>Users navigate list content using standard reading commands or screen reader navigation commands.</p>
+<h2 id="screen-reader-output">Screen Reader Output</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="txt"><code><span class="line"><span>List with 3 items</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>• Chrome</span></span>
+<span class="line"><span>• Firefox</span></span>
+<span class="line"><span>• Safari</span></span></code></pre>
+<h2 id="common-mistakes">Common Mistakes</h2>
+<p>❌ Using divs instead of a list</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;Chrome&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;Firefox&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;Safari&lt;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<p>✅ Use semantic list markup</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">ul</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Chrome&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Firefox&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Safari&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">ul</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<p>❌ Using manual numbering</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;1. Create account&lt;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;2. Verify email&lt;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;3. Sign in&lt;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<p>✅ Use an ordered list</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">ol</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Create account&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Verify email&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;Sign in&lt;/</span><span style="color:#85E89D">li</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">ol</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<h2 id="when-to-use">When to Use</h2>
+<p>Use a list when displaying:</p>
+<ul>
+<li>Navigation links</li>
+<li>Feature lists</li>
+<li>Requirements</li>
+<li>Steps in a process</li>
+<li>Collections of related content</li>
+</ul>
+<h2 id="when-not-to-use">When Not to Use</h2>
+<p>Do not use a list solely for layout purposes.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">ul</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">&quot;grid&quot;</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  ...</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">ul</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<p>is acceptable only when the content is still conceptually a list.</p>
+<p>If the content is purely layout-related, use more appropriate structural elements instead.
+:::</p> </main> </div></body></html>

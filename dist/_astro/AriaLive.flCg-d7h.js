@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a}from"./index.BzTowqF9.js";function t(){const[s,r]=a.useState("");return e.jsxs("div",{className:"space-y-4",children:[e.jsx("button",{onClick:()=>r("Profile saved successfully."),className:"rounded border px-3 py-2",children:"Save Profile"}),e.jsx("div",{"aria-live":"polite",children:s})]})}export{t as AriaLive};
