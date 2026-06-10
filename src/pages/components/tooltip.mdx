@@ -1,0 +1,219 @@
+---
+title: Tooltip
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { Tooltip } from "../../a11y/components/Tooltip/Tooltip";
+import TooltipRaw from "../../a11y/components/Tooltip/Tooltip.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Tooltip
+
+A tooltip provides additional contextual information about an element.
+
+Tooltips are typically displayed when an element receives hover or keyboard focus.
+
+## Example
+
+<CodeExample source={TooltipRaw}>
+  <Tooltip client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use `role="tooltip"` on the tooltip element.
+- Associate the tooltip using `aria-describedby`.
+- Show the tooltip on both hover and keyboard focus.
+- Tooltips should contain informational text only.
+- Tooltips should not contain interactive elements.
+
+---
+
+## Basic Pattern
+
+```html
+<button aria-describedby="tooltip-save">Save</button>
+
+<div id="tooltip-save" role="tooltip">Save your changes</div>
+```
+
+---
+
+## Screen Reader Behavior
+
+When focusing the button:
+
+```txt
+Save
+button
+
+Save your changes
+```
+
+The tooltip content is announced as a description.
+
+---
+
+## Keyboard Support
+
+| Key         | Action                   |
+| ----------- | ------------------------ |
+| Tab         | Focus trigger            |
+| Shift + Tab | Leave trigger            |
+| Escape      | Close tooltip (optional) |
+
+---
+
+## Tooltip Relationship
+
+### Trigger
+
+```html
+<button aria-describedby="tooltip-save">Save</button>
+```
+
+### Tooltip
+
+```html
+<div id="tooltip-save" role="tooltip">Save your changes</div>
+```
+
+The relationship is created through:
+
+```html
+aria-describedby
+```
+
+---
+
+## Common Mistakes
+
+### ❌ Hover Only
+
+```html
+<button>Save</button>
+
+<div class="tooltip">Save your changes</div>
+```
+
+Keyboard users never see the tooltip.
+
+---
+
+### ✅ Hover and Focus
+
+```html
+<button aria-describedby="tooltip-save">Save</button>
+```
+
+Show the tooltip on:
+
+- Mouse hover
+- Keyboard focus
+
+---
+
+### ❌ Using aria-label
+
+```html
+<button aria-label="Save your changes">Save</button>
+```
+
+This replaces the accessible name.
+
+Screen reader:
+
+```txt
+Save your changes
+button
+```
+
+The visible label "Save" is lost.
+
+---
+
+### ✅ Use aria-describedby
+
+```html
+<button aria-describedby="tooltip-save">Save</button>
+```
+
+Screen reader:
+
+```txt
+Save
+button
+
+Save your changes
+```
+
+---
+
+### ❌ Interactive Tooltip
+
+```html
+<div role="tooltip">
+  <button>Learn More</button>
+</div>
+```
+
+Tooltips should not contain interactive content.
+
+---
+
+### ✅ Informational Tooltip
+
+```html
+<div role="tooltip">Save your changes</div>
+```
+
+---
+
+## Tooltip vs Popover
+
+### Tooltip
+
+```txt
+Short description
+```
+
+Examples:
+
+- Save your changes
+- Required field
+- Maximum 500 characters
+
+---
+
+### Popover
+
+```txt
+Rich content
+Interactive content
+```
+
+Examples:
+
+- User card
+- Help dialog
+- Action menu
+
+---
+
+## When to Use
+
+Use tooltips when:
+
+- Additional context is helpful.
+- The information is not essential.
+- The content is short and descriptive.
+
+Examples:
+
+- Icon buttons
+- Status indicators
+- Form hints
+- Action descriptions
+
+Avoid using tooltips as the only way to convey important information.

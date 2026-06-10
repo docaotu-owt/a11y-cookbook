@@ -1,0 +1,195 @@
+---
+title: Tabs
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { Tabs } from "../../a11y/components/Tabs/Tabs";
+import TabsRaw from "../../a11y/components/Tabs/Tabs.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Tabs
+
+Tabs organize related content into multiple views where only one panel is visible at a time.
+
+They are commonly used to reduce scrolling and group related information.
+
+## Example
+
+<CodeExample source={TabsRaw}>
+  <Tabs client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use `role="tablist"` on the container.
+- Use `role="tab"` on each tab.
+- Use `role="tabpanel"` for tab content.
+- Use `aria-selected` to indicate the active tab.
+- Associate tabs and panels using `aria-controls` and `aria-labelledby`.
+
+---
+
+## Basic Pattern
+
+```html
+<div role="tablist" aria-label="Accessibility Topics">
+  <button role="tab" aria-selected="true" aria-controls="panel-1">
+    Overview
+  </button>
+
+  <button role="tab" aria-selected="false" aria-controls="panel-2">
+    Keyboard
+  </button>
+</div>
+
+<div id="panel-1" role="tabpanel" aria-labelledby="tab-1">Content</div>
+```
+
+---
+
+## Screen Reader Behavior
+
+Selected tab:
+
+```txt
+Overview
+tab
+selected
+1 of 3
+```
+
+Unselected tab:
+
+```txt
+Keyboard
+tab
+2 of 3
+```
+
+Panel:
+
+```txt
+tabpanel
+Accessibility ensures websites can be used by everyone.
+```
+
+---
+
+## Keyboard Support
+
+| Key         | Action                  |
+| ----------- | ----------------------- |
+| Tab         | Enter or leave tab list |
+| Left Arrow  | Previous tab            |
+| Right Arrow | Next tab                |
+| Home        | First tab               |
+| End         | Last tab                |
+| Enter       | Activate tab            |
+| Space       | Activate tab            |
+
+---
+
+## Common Mistakes
+
+### ❌ Missing Roles
+
+```html
+<div>
+  <button>Overview</button>
+  <button>Keyboard</button>
+</div>
+```
+
+Assistive technologies do not recognize this as a tab interface.
+
+---
+
+### ✅ Use Tab Roles
+
+```html
+<div role="tablist">
+  <button role="tab">Overview</button>
+</div>
+```
+
+---
+
+### ❌ Missing aria-selected
+
+```html
+<button role="tab">Overview</button>
+```
+
+Users cannot determine which tab is active.
+
+---
+
+### ✅ Use aria-selected
+
+```html
+<button role="tab" aria-selected="true">Overview</button>
+```
+
+---
+
+### ❌ All Tabs Focusable
+
+```html
+<button role="tab">Overview</button>
+
+<button role="tab">Keyboard</button>
+
+<button role="tab">Screen Readers</button>
+```
+
+This creates unnecessary tab stops.
+
+---
+
+### ✅ Use Roving Tabindex
+
+```html
+<button role="tab" tabindex="0">Overview</button>
+
+<button role="tab" tabindex="-1">Keyboard</button>
+```
+
+Only the active tab should be in the tab order.
+
+---
+
+## Tab Relationships
+
+### Tab
+
+```html
+<button id="tab-1" role="tab" aria-controls="panel-1">Overview</button>
+```
+
+### Panel
+
+```html
+<div id="panel-1" role="tabpanel" aria-labelledby="tab-1">Content</div>
+```
+
+This creates a two-way relationship between the tab and its panel.
+
+---
+
+## When to Use
+
+Use tabs when:
+
+- Content is related but distinct.
+- Only one section needs to be visible at a time.
+- Switching between views should be fast.
+
+Examples:
+
+- Settings pages
+- Product details
+- User profiles
+- Documentation sections
+
+Avoid tabs when users need to compare content across multiple panels simultaneously.

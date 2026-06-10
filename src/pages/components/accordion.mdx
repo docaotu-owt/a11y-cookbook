@@ -1,0 +1,176 @@
+---
+title: Accordion
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { Accordion } from "../../a11y/components/Accordion/Accordion";
+import AccordionRaw from "../../a11y/components/Accordion/Accordion.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Accordion
+
+An accordion allows users to expand and collapse sections of content.
+
+It helps reduce visual clutter while keeping content available when needed.
+
+## Example
+
+<CodeExample source={AccordionRaw}>
+  <Accordion client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use a native `button` for the trigger.
+- Use `aria-expanded` to communicate state.
+- Use `aria-controls` to associate the trigger with its content.
+- Use `aria-labelledby` on the panel.
+- The accordion header should be a heading when appropriate.
+
+---
+
+## Basic Pattern
+
+```html
+<h3>
+  <button aria-expanded="false" aria-controls="panel-1">
+    What is Accessibility?
+  </button>
+</h3>
+
+<div id="panel-1" role="region" aria-labelledby="accordion-trigger">
+  Content
+</div>
+```
+
+---
+
+## Screen Reader Behavior
+
+Collapsed:
+
+```txt
+What is Accessibility?
+button
+collapsed
+```
+
+Expanded:
+
+```txt
+What is Accessibility?
+button
+expanded
+```
+
+---
+
+## Keyboard Support
+
+| Key   | Action                  |
+| ----- | ----------------------- |
+| Tab   | Focus accordion trigger |
+| Enter | Toggle panel            |
+| Space | Toggle panel            |
+
+Native buttons provide this behavior automatically.
+
+---
+
+## Common Mistakes
+
+### ❌ Clickable Div
+
+```html
+<div onclick="toggleAccordion()">What is Accessibility?</div>
+```
+
+Problems:
+
+- Not keyboard accessible
+- Not announced as a button
+- Missing expanded/collapsed state
+
+---
+
+### ✅ Use Button
+
+```html
+<button aria-expanded="false">What is Accessibility?</button>
+```
+
+---
+
+### ❌ Missing aria-expanded
+
+```html
+<button>What is Accessibility?</button>
+```
+
+Screen readers cannot determine whether the panel is open.
+
+---
+
+### ✅ Use aria-expanded
+
+```html
+<button aria-expanded="true">What is Accessibility?</button>
+```
+
+---
+
+### ❌ Missing Relationship
+
+```html
+<button>Section</button>
+
+<div>Content</div>
+```
+
+The relationship between trigger and content is unclear.
+
+---
+
+### ✅ Link Trigger and Panel
+
+```html
+<button aria-controls="panel-1">Section</button>
+
+<div id="panel-1">Content</div>
+```
+
+---
+
+## Multiple Accordion Items
+
+```html
+<h3>
+  <button aria-expanded="false" aria-controls="faq-1">Question 1</button>
+</h3>
+
+<div id="faq-1">Answer 1</div>
+
+<h3>
+  <button aria-expanded="false" aria-controls="faq-2">Question 2</button>
+</h3>
+
+<div id="faq-2">Answer 2</div>
+```
+
+---
+
+## When to Use
+
+Use an accordion when:
+
+- Content is optional or secondary.
+- Multiple sections share limited space.
+- Users benefit from progressively revealing information.
+
+Examples:
+
+- FAQ pages
+- Settings panels
+- Documentation sections
+- Product details

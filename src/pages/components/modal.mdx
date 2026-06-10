@@ -1,0 +1,388 @@
+---
+title: Modal
+layout: ../../layouts/Layout.astro
+---
+
+import { ModalExample } from "../../a11y/components/Modal/ModalExample.tsx";
+import ModalRaw from "../../a11y/components/Modal/Modal.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Modal
+
+A modal dialog is a window that appears on top of the current page and requires the user to interact with it before returning to the underlying content.
+
+---
+
+## Accessibility Goals
+
+A user should be able to:
+
+- Discover that a dialog has appeared.
+- Understand the purpose of the dialog.
+- Navigate all controls using only a keyboard.
+- Close the dialog without using a mouse.
+- Return to their previous location when the dialog closes.
+- Use the dialog with a screen reader.
+
+---
+
+## Dialog Anatomy
+
+<CodeExample title={"Modal example"} source={ModalRaw}>
+  <ModalExample client:load />
+</CodeExample>
+
+```tsx
+<>
+  <button
+    aria-haspopup="dialog"
+    aria-expanded={open}
+    onClick={() => setOpen(true)}
+  >
+    Open Modal
+  </button>
+
+  <Modal
+    isOpen={open}
+    title="Delete Item"
+    description="This action cannot be undone."
+    onClose={() => setOpen(false)}
+  >
+    <p>Are you sure you want to continue?</p>
+
+    <div className="mt-4 flex gap-2">
+      <button onClick={() => setOpen(false)}>Cancel</button>
+
+      <button>Delete</button>
+    </div>
+  </Modal>
+</>
+```
+
+---
+
+## ARIA Attributes
+
+### role="dialog"
+
+Identifies the element as a dialog.
+
+```html
+<div role="dialog"></div>
+```
+
+Without this role, screen readers may announce the content as ordinary page content rather than a modal window.
+
+When focus enters the dialog, screen readers can announce:
+
+> Dialog, Delete Item
+
+This helps users understand that a new interaction context has appeared.
+
+---
+
+### aria-modal="true"
+
+Indicates that content outside the dialog is currently unavailable.
+
+```html
+<div role="dialog" aria-modal="true"></div>
+```
+
+Why it matters:
+
+When a modal is open, users should not interact with background content.
+
+Screen readers use this information to understand that the dialog is the active context.
+
+Without it, users may accidentally navigate to content behind the modal.
+
+---
+
+### aria-labelledby
+
+Provides the accessible name of the dialog.
+
+```html
+<div role="dialog" aria-labelledby="modal-title">
+  <h2 id="modal-title">Delete Item</h2>
+</div>
+```
+
+Screen readers announce:
+
+> Dialog, Delete Item
+
+Without an accessible name:
+
+> Dialog
+
+The user knows a dialog exists but has no idea what it is for.
+
+---
+
+### aria-describedby
+
+Provides additional context about the dialog.
+
+```html
+<div role="dialog" aria-describedby="modal-description">
+  <p id="modal-description">This action cannot be undone.</p>
+</div>
+```
+
+Screen readers may announce:
+
+> Dialog, Delete Item. This action cannot be undone.
+
+This gives important information before the user starts interacting with controls.
+
+Use it for:
+
+- Warnings
+- Instructions
+- Confirmation messages
+- Additional context
+
+---
+
+## Focus Management
+
+Focus management is the most important accessibility requirement for modals.
+
+### When Opening
+
+When the modal opens:
+
+```text
+Open Modal Button
+        ↓
+First focusable element inside modal
+```
+
+Focus should move into the dialog immediately.
+
+Example:
+
+```html
+<button>Cancel</button>
+```
+
+A keyboard user should not have to tab through the entire page to reach the modal.
+
+---
+
+### Focus Trap
+
+While the modal is open:
+
+```text
+Cancel → Delete
+   ↑        ↓
+   ← ← ← ← ←
+```
+
+Tab navigation should remain inside the dialog.
+
+Bad experience:
+
+```text
+Cancel
+Delete
+Navbar Link
+Footer Link
+```
+
+The user has escaped the modal and is now navigating the page behind it.
+
+Good experience:
+
+```text
+Cancel
+Delete
+Cancel
+Delete
+```
+
+Focus stays inside the dialog until it is closed.
+
+---
+
+### When Closing
+
+When the dialog closes:
+
+```text
+Open Modal Button
+      ↓
+Modal Opens
+      ↓
+Modal Closes
+      ↓
+Open Modal Button
+```
+
+Focus should return to the element that opened the dialog.
+
+Without focus restoration:
+
+- Keyboard users lose their place.
+- Screen reader users may become disoriented.
+
+---
+
+## Keyboard Support
+
+### Tab
+
+Moves to the next focusable element.
+
+```text
+Cancel → Delete
+```
+
+### Shift + Tab
+
+Moves to the previous focusable element.
+
+```text
+Delete → Cancel
+```
+
+### Escape
+
+Closes the dialog.
+
+```text
+Esc
+↓
+Dialog closes
+```
+
+This is a widely expected behavior across operating systems and web applications.
+
+---
+
+## Screen Reader Experience
+
+A good screen reader experience might sound like:
+
+> Dialog
+
+> Delete Item
+
+> This action cannot be undone.
+
+> Cancel button
+
+The user immediately understands:
+
+- A dialog opened
+- Its purpose
+- Important instructions
+- Available actions
+
+---
+
+## Common Accessibility Mistakes
+
+### Missing Dialog Name
+
+❌
+
+```html
+<div role="dialog"></div>
+```
+
+Screen reader:
+
+> Dialog
+
+No context is provided.
+
+✅
+
+```html
+<div role="dialog" aria-labelledby="modal-title"></div>
+```
+
+Screen reader:
+
+> Dialog, Delete Item
+
+---
+
+### Missing Focus Management
+
+❌
+
+Focus remains on the page behind the dialog.
+
+Keyboard users may not even realize the modal appeared.
+
+✅
+
+Move focus into the dialog when it opens.
+
+---
+
+### Missing Focus Trap
+
+❌
+
+Users can tab into page content behind the modal.
+
+✅
+
+Keep focus inside the dialog until it closes.
+
+---
+
+### No Escape Key Support
+
+❌
+
+Users must find the close button.
+
+✅
+
+Allow Escape to dismiss the dialog.
+
+---
+
+### Clickable div Instead of Button
+
+❌
+
+```html
+<div onclick="closeModal()">Close</div>
+```
+
+The element is not keyboard accessible.
+
+✅
+
+```html
+<button>Close</button>
+```
+
+Buttons provide keyboard support and screen reader semantics automatically.
+
+---
+
+## Testing Checklist
+
+Before shipping a modal:
+
+- Can it be opened using a keyboard?
+- Does focus move into the dialog?
+- Is the dialog announced correctly?
+- Is focus trapped inside?
+- Does Escape close it?
+- Does focus return to the trigger?
+- Can it be used without a mouse?
+- Does it work with a screen reader?
+- Is the dialog title announced?
+- Is the description announced?
+
+If all answers are "Yes", the modal is likely accessible.

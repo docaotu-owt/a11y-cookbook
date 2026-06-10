@@ -1,0 +1,249 @@
+---
+title: Toast
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { Toast } from "../../a11y/components/Toast/Toast";
+import ToastRaw from "../../a11y/components/Toast/Toast.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Toast
+
+A toast is a temporary notification that informs users about the result of an action.
+
+Unlike dialogs, toasts do not receive focus and do not interrupt the user's workflow.
+
+## Example
+
+<CodeExample source={ToastRaw}>
+  <Toast client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use a live region to announce toast messages.
+- Do not move keyboard focus to the toast.
+- Use `role="status"` for informational messages.
+- Use `role="alert"` for urgent or error messages.
+- Ensure important information remains available elsewhere if needed.
+
+---
+
+## Success Toast
+
+```html
+<div role="status" aria-live="polite">Profile saved successfully.</div>
+```
+
+Screen reader:
+
+```txt
+Profile saved successfully.
+```
+
+The message is announced without interrupting the user.
+
+---
+
+## Error Toast
+
+```html
+<div role="alert">Failed to save profile.</div>
+```
+
+Screen reader:
+
+```txt
+Failed to save profile.
+```
+
+The announcement happens immediately.
+
+---
+
+## Using aria-live
+
+### Polite
+
+```html
+<div aria-live="polite">Profile saved successfully.</div>
+```
+
+Behavior:
+
+```txt
+Wait for current speech to finish.
+Then announce the message.
+```
+
+Recommended for:
+
+- Success messages
+- Informational updates
+- Background notifications
+
+---
+
+### Assertive
+
+```html
+<div aria-live="assertive">Failed to save profile.</div>
+```
+
+Behavior:
+
+```txt
+Interrupt current speech.
+Announce immediately.
+```
+
+Recommended for:
+
+- Errors
+- Critical failures
+- Security warnings
+
+---
+
+## Status vs Alert
+
+### Status
+
+```html
+<div role="status">Profile saved successfully.</div>
+```
+
+Equivalent to:
+
+```html
+<div role="status" aria-live="polite">Profile saved successfully.</div>
+```
+
+Use for:
+
+- Success notifications
+- Informational updates
+
+---
+
+### Alert
+
+```html
+<div role="alert">Failed to save profile.</div>
+```
+
+Equivalent to:
+
+```html
+<div role="alert" aria-live="assertive">Failed to save profile.</div>
+```
+
+Use for:
+
+- Errors
+- Important warnings
+- Critical issues
+
+---
+
+## Keyboard Support
+
+Most toast notifications:
+
+| Key         | Action                     |
+| ----------- | -------------------------- |
+| Tab         | Continue normal navigation |
+| Shift + Tab | Continue normal navigation |
+
+Toasts generally do not receive focus automatically.
+
+---
+
+## Common Mistakes
+
+### ❌ Focus the Toast
+
+```js
+toast.focus();
+```
+
+Problems:
+
+- Interrupts user workflow.
+- Unexpected focus movement.
+
+---
+
+### ✅ Use a Live Region
+
+```html
+<div role="status">Saved successfully.</div>
+```
+
+The message is announced without stealing focus.
+
+---
+
+### ❌ Visual Toast Only
+
+```html
+<div>Saved successfully.</div>
+```
+
+Screen reader users may never know the message appeared.
+
+---
+
+### ✅ Use role="status"
+
+```html
+<div role="status">Saved successfully.</div>
+```
+
+---
+
+### ❌ Use Alert for Everything
+
+```html
+<div role="alert">Profile saved successfully.</div>
+```
+
+This creates unnecessary interruptions.
+
+---
+
+### ✅ Match Urgency
+
+```html
+<div role="status">Saved successfully.</div>
+```
+
+```html
+<div role="alert">Failed to save profile.</div>
+```
+
+---
+
+## When to Use
+
+Use a toast when:
+
+- Confirming an action.
+- Reporting a background process result.
+- Showing temporary feedback.
+
+Examples:
+
+- Profile saved
+- File uploaded
+- Settings updated
+- Copy successful
+
+Avoid using a toast when:
+
+- User action is required.
+- Information is critical.
+- Content is lengthy.
+
+Use a dialog or alert dialog instead.

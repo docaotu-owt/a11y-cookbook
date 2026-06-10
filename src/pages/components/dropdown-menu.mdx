@@ -1,0 +1,205 @@
+---
+title: Dropdown Menu
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { DropdownMenu } from "../../a11y/components/DropdownMenu/DropdownMenu";
+import DropdownMenuRaw from "../../a11y/components/DropdownMenu/DropdownMenu.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Dropdown Menu
+
+A dropdown menu presents a list of actions that can be triggered from a button.
+
+Unlike a select element, menu items perform actions rather than choosing a value.
+
+## Example
+
+<CodeExample source={DropdownMenuRaw}>
+  <DropdownMenu client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use a button as the menu trigger.
+- Use `aria-haspopup="menu"`.
+- Use `aria-expanded` to indicate menu state.
+- Use `role="menu"` for the popup container.
+- Use `role="menuitem"` for actions.
+- Return focus to the trigger when the menu closes.
+
+---
+
+## Basic Structure
+
+```html
+<button aria-haspopup="menu" aria-expanded="false" aria-controls="actions-menu">
+  Actions
+</button>
+
+<div id="actions-menu" role="menu">
+  <button role="menuitem">Edit</button>
+
+  <button role="menuitem">Delete</button>
+</div>
+```
+
+---
+
+## Screen Reader Behavior
+
+Closed:
+
+```txt
+Actions
+button
+collapsed
+menu button
+```
+
+Open:
+
+```txt
+Actions
+button
+expanded
+menu button
+```
+
+Inside menu:
+
+```txt
+Edit
+menu item
+1 of 3
+```
+
+---
+
+## Keyboard Support
+
+| Key        | Action        |
+| ---------- | ------------- |
+| Enter      | Open menu     |
+| Space      | Open menu     |
+| Arrow Down | Next item     |
+| Arrow Up   | Previous item |
+| Home       | First item    |
+| End        | Last item     |
+| Escape     | Close menu    |
+| Tab        | Leave menu    |
+
+---
+
+## Common Mistakes
+
+### ❌ Clickable Div
+
+```html
+<div onclick="openMenu()">Actions</div>
+```
+
+Problems:
+
+- Not keyboard accessible.
+- Not announced as a menu button.
+
+---
+
+### ✅ Use Button
+
+```html
+<button aria-haspopup="menu">Actions</button>
+```
+
+---
+
+### ❌ Missing Expanded State
+
+```html
+<button>Actions</button>
+```
+
+Users cannot determine whether the menu is open.
+
+---
+
+### ✅ Use aria-expanded
+
+```html
+<button aria-expanded="true">Actions</button>
+```
+
+---
+
+### ❌ Missing Menu Roles
+
+```html
+<div>
+  <button>Edit</button>
+</div>
+```
+
+Assistive technologies may not recognize the widget as a menu.
+
+---
+
+### ✅ Use Menu Roles
+
+```html
+<div role="menu">
+  <button role="menuitem">Edit</button>
+</div>
+```
+
+---
+
+## Dropdown Menu vs Select
+
+### Select
+
+```html
+<select>
+  <option>Vietnam</option>
+</select>
+```
+
+Use for:
+
+- Choosing a value.
+- Form inputs.
+
+---
+
+### Dropdown Menu
+
+```html
+<button aria-haspopup="menu">Actions</button>
+```
+
+Use for:
+
+- Edit
+- Delete
+- Duplicate
+- Share
+
+Menu items perform actions rather than selecting a value.
+
+---
+
+## When to Use
+
+Use a dropdown menu when:
+
+- Multiple actions are available.
+- Space is limited.
+- Actions are secondary.
+
+Examples:
+
+- Row actions in tables
+- User profile menus
+- More actions menus
+- Contextual action menus

@@ -1,0 +1,287 @@
+---
+title: Data Table
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { DataTable } from "../../a11y/components/DataTable/DataTable";
+import DataTableRaw from "../../a11y/components/DataTable/DataTable.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Data Table
+
+A data table presents structured information in rows and columns.
+
+When displaying tabular data, prefer native HTML table elements because they provide built-in accessibility semantics.
+
+## Example
+
+<CodeExample source={DataTableRaw}>
+  <DataTable client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use semantic table elements.
+- Provide a caption when the table needs additional context.
+- Use `th` for headers.
+- Use `scope="col"` for column headers.
+- Use `scope="row"` for row headers when appropriate.
+- Avoid replacing tables with div-based layouts.
+
+---
+
+## Basic Structure
+
+```html
+<table>
+  <caption>
+    User accounts
+  </caption>
+
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+
+      <td>john@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+## Screen Reader Behavior
+
+When navigating a column header:
+
+```txt
+Name
+column header
+```
+
+Moving through rows:
+
+```txt
+John Doe
+row 1
+column 1
+```
+
+```txt
+john@example.com
+column 2
+```
+
+Screen readers automatically associate cells with their headers.
+
+---
+
+## Keyboard Support
+
+| Key                          | Action                                 |
+| ---------------------------- | -------------------------------------- |
+| Tab                          | Focus interactive content inside cells |
+| Screen Reader Table Commands | Navigate rows and columns              |
+
+Most table navigation is handled by assistive technologies.
+
+---
+
+## Caption
+
+### Good
+
+```html
+<table>
+  <caption>
+    User accounts
+  </caption>
+</table>
+```
+
+Provides context before reading the table.
+
+---
+
+### Bad
+
+```html
+<table></table>
+```
+
+Users may not understand the table's purpose.
+
+---
+
+## Column Headers
+
+### Good
+
+```html
+<th scope="col">Email</th>
+```
+
+Screen readers announce:
+
+```txt
+Email
+column header
+```
+
+---
+
+### Bad
+
+```html
+<td>Email</td>
+```
+
+The header relationship is lost.
+
+---
+
+## Row Headers
+
+### Good
+
+```html
+<th scope="row">John Doe</th>
+```
+
+Provides context when moving across the row.
+
+---
+
+### Bad
+
+```html
+<td>John Doe</td>
+```
+
+Users may lose row context.
+
+---
+
+## Common Mistakes
+
+### ❌ Div-based Table
+
+```html
+<div class="row">
+  <div>Name</div>
+  <div>Email</div>
+</div>
+```
+
+Problems:
+
+- No table semantics.
+- No header associations.
+- Difficult for screen readers.
+
+---
+
+### ✅ Use Table Elements
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+</table>
+```
+
+---
+
+### ❌ Missing Headers
+
+```html
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Email</td>
+  </tr>
+</table>
+```
+
+Users cannot identify columns correctly.
+
+---
+
+### ✅ Use th
+
+```html
+<th scope="col">Name</th>
+```
+
+---
+
+### ❌ Using Table for Layout
+
+```html
+<table>
+  <tr>
+    <td>Sidebar</td>
+
+    <td>Content</td>
+  </tr>
+</table>
+```
+
+Tables should represent data, not page layout.
+
+---
+
+## Sorting Example
+
+If columns are sortable, use:
+
+```html
+<th aria-sort="ascending">Name</th>
+```
+
+Possible values:
+
+```txt
+ascending
+descending
+none
+other
+```
+
+Screen readers announce sorting state.
+
+---
+
+## When to Use
+
+Use a table when:
+
+- Information is naturally tabular.
+- Users need to compare values across rows and columns.
+
+Examples:
+
+- User lists
+- Orders
+- Reports
+- Financial data
+- Audit logs
+
+Avoid tables for:
+
+- Page layout
+- Cards
+- Navigation
+- General content arrangement

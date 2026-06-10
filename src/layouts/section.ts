@@ -57,6 +57,10 @@ export const sections: Section[] = [
       { title: "Modal", href: "/components/modal" },
       { title: "Accordion", href: "/components/accordion" },
       { title: "Tabs", href: "/components/tabs" },
+      { title: "Tooltips", href: "/components/tooltip" },
+      { title: "Combobox", href: "/components/combobox" },
+      { title: "Dropdown Menu", href: "/components/dropdown-menu" },
+      // { title: "Data Table", href: "/components/data-table" },
     ],
   },
 ];

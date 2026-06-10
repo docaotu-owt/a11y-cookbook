@@ -1,0 +1,191 @@
+---
+title: Combobox
+category: Components
+layout: ../../layouts/Layout.astro
+---
+
+import { Combobox } from "../../a11y/components/Combobox/Combobox";
+import ComboboxRaw from "../../a11y/components/Combobox/Combobox.tsx?raw";
+import CodeExample from "../../helper/CodeExample.astro";
+
+# Combobox
+
+A combobox combines a text input with a list of selectable options.
+
+Users can type to filter available options and select one using the keyboard or mouse.
+
+## Example
+
+<CodeExample source={ComboboxRaw}>
+  <Combobox client:load />
+</CodeExample>
+
+## Accessibility Notes
+
+- Use `role="combobox"` on the input.
+- Use `aria-expanded` to communicate popup state.
+- Use `aria-controls` to reference the listbox.
+- Use `aria-activedescendant` to identify the active option.
+- Use `role="listbox"` for the popup.
+- Use `role="option"` for each item.
+
+---
+
+## Basic Structure
+
+```html
+<input
+  role="combobox"
+  aria-expanded="true"
+  aria-controls="countries"
+  aria-activedescendant="option-1"
+/>
+
+<ul id="countries" role="listbox">
+  <li id="option-1" role="option">Vietnam</li>
+</ul>
+```
+
+---
+
+## Screen Reader Behavior
+
+Input:
+
+```txt
+Country
+combobox
+collapsed
+```
+
+When opened:
+
+```txt
+Country
+combobox
+expanded
+```
+
+Navigating options:
+
+```txt
+Vietnam
+1 of 6
+```
+
+```txt
+Japan
+2 of 6
+```
+
+---
+
+## Keyboard Support
+
+| Key        | Action          |
+| ---------- | --------------- |
+| Tab        | Focus combobox  |
+| Arrow Down | Next option     |
+| Arrow Up   | Previous option |
+| Enter      | Select option   |
+| Escape     | Close popup     |
+
+---
+
+## Common Mistakes
+
+### ❌ Input + Random Div
+
+```html
+<input />
+
+<div>Vietnam Japan</div>
+```
+
+Assistive technologies do not recognize this as a combobox.
+
+---
+
+### ✅ Proper Roles
+
+```html
+<input role="combobox" />
+
+<ul role="listbox">
+  <li role="option">Vietnam</li>
+</ul>
+```
+
+---
+
+### ❌ Missing aria-expanded
+
+```html
+<input role="combobox" />
+```
+
+Users cannot determine whether suggestions are visible.
+
+---
+
+### ✅ Use aria-expanded
+
+```html
+<input role="combobox" aria-expanded="true" />
+```
+
+---
+
+### ❌ Missing Active Option
+
+```html
+<input role="combobox" />
+```
+
+Screen readers may not announce which option is highlighted.
+
+---
+
+### ✅ Use aria-activedescendant
+
+```html
+<input role="combobox" aria-activedescendant="option-1" />
+```
+
+---
+
+## Combobox vs Select
+
+### Select
+
+```html
+<select>
+  <option>Vietnam</option>
+</select>
+```
+
+Use when:
+
+- Options are known.
+- Search is unnecessary.
+
+---
+
+### Combobox
+
+```html
+<input role="combobox" />
+```
+
+Use when:
+
+- There are many options.
+- Users benefit from filtering.
+- Autocomplete is desired.
+
+Examples:
+
+- Country selector
+- User search
+- Product search
+- Address lookup
