@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
 import { Sidebar } from "./Sidebar";
+import { TableOfContents } from "../components/TableOfContents";
+import { Header } from "./Header";
+
+const { headings } = Astro.props;
 ---
 
 <!doctype html>
@@ -14,6 +18,7 @@ import { Sidebar } from "./Sidebar";
     <title>A11y cookbook</title>
   </head>
   <body class="h-screen overflow-hidden">
+    <Header client:load />
     <div class="flex h-full">
       <Sidebar pathname={Astro.url.pathname} client:load />
 
@@ -23,6 +28,7 @@ import { Sidebar } from "./Sidebar";
       >
         <slot />
       </main>
+      <TableOfContents headings={headings} client:load />
     </div>
   </body>
 </html>
@@ -35,3 +41,13 @@ import { Sidebar } from "./Sidebar";
     height: 100%;
   }
 </style>
+
+<head>
+  <script is:inline>
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
+</head>

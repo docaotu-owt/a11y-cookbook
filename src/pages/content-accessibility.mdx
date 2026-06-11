@@ -1,0 +1,324 @@
+---
+title: Content Accessibility
+layout: ../layouts/Layout.astro
+---
+
+# Content Accessibility
+
+Accessible content helps users understand information quickly and complete tasks successfully.
+
+Even when a website is technically accessible, poor content can create barriers for users.
+
+This guide covers common content considerations that improve readability, comprehension, and usability.
+
+---
+
+## Clear Language
+
+Use simple and direct language whenever possible.
+
+### Why It Matters
+
+Users may:
+
+- Have cognitive disabilities
+- Be non-native speakers
+- Be unfamiliar with technical terminology
+- Be reading under stressful conditions
+
+### Good Example
+
+```txt
+Sign in to your account.
+```
+
+### Bad Example
+
+```txt
+Authenticate your credentials.
+```
+
+### Recommendations
+
+- Use familiar words
+- Avoid unnecessary jargon
+- Write concise sentences
+- Prefer active voice
+
+---
+
+## Meaningful Headings
+
+Headings help users understand page structure and navigate content efficiently.
+
+### Why It Matters
+
+Screen reader users often navigate by headings.
+
+A clear heading structure allows users to quickly find relevant information.
+
+### Good Example
+
+```txt
+Order Summary
+
+Shipping Address
+
+Payment Information
+```
+
+### Bad Example
+
+```txt
+Details
+
+Information
+
+More
+```
+
+### Recommendations
+
+- Make headings descriptive
+- Use headings to organize content
+- Avoid vague titles
+- Maintain a logical hierarchy
+
+---
+
+## Meaningful Link Text
+
+Links should clearly describe their destination or purpose.
+
+### Why It Matters
+
+Screen readers can provide a list of links on a page.
+
+Users should understand each link without needing surrounding context.
+
+### Good Example
+
+```html
+<a href="/accessibility-guide"> Read the Accessibility Guide </a>
+```
+
+### Bad Example
+
+```html
+<a href="/accessibility-guide"> Click here </a>
+```
+
+### Recommendations
+
+- Describe the destination
+- Avoid "Click here"
+- Avoid "Read more" without context
+- Keep link text concise
+
+---
+
+## Helpful Error Messages
+
+Error messages should explain what went wrong and how to fix it.
+
+### Good Example
+
+```txt
+Password must contain at least 8 characters.
+```
+
+### Bad Example
+
+```txt
+Invalid input.
+```
+
+### Recommendations
+
+- Explain the problem
+- Provide a solution
+- Place messages near the affected field
+- Use clear language
+
+---
+
+## Form Instructions
+
+Provide instructions before users encounter errors.
+
+### Good Example
+
+```txt
+Password must contain at least 8 characters and one number.
+```
+
+### Bad Example
+
+```txt
+Enter Password
+```
+
+Users only discover requirements after submission.
+
+### Recommendations
+
+- Explain requirements early
+- Keep instructions concise
+- Place instructions near the relevant control
+
+---
+
+## Avoid Sensory Instructions
+
+Instructions should not rely solely on appearance, color, shape, or location.
+
+### Bad Example
+
+```txt
+Click the green button.
+```
+
+### Bad Example
+
+```txt
+See the information on the right.
+```
+
+### Good Example
+
+```txt
+Click the Save button.
+```
+
+### Recommendations
+
+Avoid references such as:
+
+- Green button
+- Red text
+- Left side
+- Right side
+- Above
+- Below
+
+Layouts may change across devices and users may not perceive visual differences.
+
+---
+
+## Descriptive Page Titles
+
+Every page should have a meaningful title.
+
+### Good Example
+
+```txt
+Order History | My Account
+```
+
+### Bad Example
+
+```txt
+Home
+```
+
+### Recommendations
+
+- Clearly describe page content
+- Include context when helpful
+- Keep titles concise
+
+---
+
+## Consistent Terminology
+
+Use the same words for the same concepts throughout the application.
+
+### Good Example
+
+```txt
+Sign In
+
+Sign In
+
+Sign In
+```
+
+### Bad Example
+
+```txt
+Sign In
+
+Log In
+
+Authenticate
+```
+
+### Recommendations
+
+- Choose terminology intentionally
+- Stay consistent across screens
+- Avoid unnecessary synonyms
+
+---
+
+## Reading Order
+
+Content should make sense when read from top to bottom.
+
+### Why It Matters
+
+Screen readers follow document order.
+
+A visually correct layout may still create confusion if content is ordered incorrectly.
+
+### Recommendations
+
+- Keep logical reading order
+- Ensure headings precede related content
+- Avoid relying on visual placement alone
+
+---
+
+## Content Accessibility Checklist
+
+Before publishing content:
+
+### Language
+
+- Clear and concise wording
+- Minimal jargon
+- Active voice
+
+### Headings
+
+- Descriptive headings
+- Logical hierarchy
+- Consistent structure
+
+### Links
+
+- Meaningful link text
+- No "Click here"
+- Purpose is clear
+
+### Forms
+
+- Helpful instructions
+- Clear error messages
+- Requirements explained upfront
+
+### Consistency
+
+- Consistent terminology
+- Predictable language
+- Logical reading order
+
+---
+
+## Key Takeaways
+
+- Accessible content is easier for everyone to understand.
+- Clear language reduces cognitive load.
+- Headings and link text improve navigation.
+- Helpful instructions and error messages improve task completion.
+- Accessibility is not only about code—it is also about communication.

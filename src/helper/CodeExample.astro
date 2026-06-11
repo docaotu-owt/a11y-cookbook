@@ -2,6 +2,7 @@
 const { source } = Astro.props;
 
 import { Code } from "astro/components";
+import { CopyIcon } from "lucide-react";
 
 const id = `code-example`;
 ---
@@ -35,9 +36,10 @@ const id = `code-example`;
     <button
       type="button"
       data-copy
-      class="absolute right-3 top-3 rounded border px-3 py-0 text-sm hover:bg-slate-100"
+      class="absolute right-3 top-3 rounded px-3 py-1 text-sm hover:bg-slate-100"
+      aria-label="Copy demo code"
     >
-      Copy
+      <CopyIcon />
     </button>
 
     <div class="overflow-auto p-4">

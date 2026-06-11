@@ -1,0 +1,296 @@
+---
+title: Design Accessibility
+layout: ../layouts/Layout.astro
+---
+
+# Design Accessibility
+
+Accessibility starts long before code is written.
+
+Many accessibility issues originate during the design phase and cannot be fully solved by developers alone.
+
+This guide covers common design considerations that help create more accessible and inclusive user experiences.
+
+---
+
+## Color Contrast
+
+Color contrast determines how easily users can distinguish text and interface elements from their backgrounds.
+
+### Why It Matters
+
+Users with:
+
+- Low vision
+- Color vision deficiencies
+- Eye strain
+- Poor lighting conditions
+
+may struggle to read low-contrast content.
+
+### Good Example
+
+Dark text on a light background.
+
+```css
+color: #1f2937;
+background: #ffffff;
+```
+
+### Bad Example
+
+Light gray text on a white background.
+
+```css
+color: #d1d5db;
+background: #ffffff;
+```
+
+### Recommendations
+
+- Normal text: minimum contrast ratio of **4.5:1**
+- Large text: minimum contrast ratio of **3:1**
+- Icons and UI controls should also have sufficient contrast
+
+---
+
+## Don't Rely on Color Alone
+
+Color should never be the only way to communicate information.
+
+### Bad Example
+
+```txt
+Required fields are shown in red.
+```
+
+Users who cannot perceive the color may miss the information.
+
+### Good Example
+
+```txt
+Name *
+```
+
+or
+
+```txt
+Required
+```
+
+combined with color.
+
+### Recommendations
+
+Use:
+
+- Text labels
+- Icons
+- Patterns
+- Additional visual indicators
+
+alongside color.
+
+---
+
+## Focus Indicators
+
+Keyboard users rely on visible focus indicators to understand where they are on the page.
+
+### Why It Matters
+
+Without focus indicators, users navigating with:
+
+- Keyboard
+- Switch devices
+- Screen readers
+
+may become lost.
+
+### Good Example
+
+A clearly visible outline or focus ring.
+
+```css
+:focus-visible {
+  outline: 2px solid;
+}
+```
+
+### Bad Example
+
+```css
+outline: none;
+```
+
+### Recommendations
+
+- Never remove focus styles without providing an alternative.
+- Ensure focus indicators are clearly visible against surrounding content.
+- Maintain consistency across the application.
+
+---
+
+## Typography
+
+Typography significantly affects readability and comprehension.
+
+### Font Size
+
+Avoid extremely small text.
+
+Recommended:
+
+- Body text: 16px or larger
+- Line height: 1.4–1.6
+
+### Good Example
+
+```css
+font-size: 16px;
+line-height: 1.5;
+```
+
+### Bad Example
+
+```css
+font-size: 10px;
+line-height: 1;
+```
+
+### Recommendations
+
+- Use readable font sizes.
+- Avoid long lines of text.
+- Provide sufficient line spacing.
+- Ensure text remains readable when zoomed.
+
+---
+
+## Touch Targets
+
+Interactive elements should be large enough to activate easily.
+
+### Why It Matters
+
+Small targets are difficult for:
+
+- Mobile users
+- Users with motor impairments
+- Users with temporary injuries
+
+### Good Example
+
+```txt
+Button size:
+44px × 44px
+```
+
+### Bad Example
+
+Tiny icons with minimal clickable area.
+
+### Recommendations
+
+- Minimum touch target size: 44px × 44px
+- Provide adequate spacing between controls
+- Avoid placing interactive elements too close together
+
+---
+
+## Motion & Animation
+
+Motion can cause discomfort for some users.
+
+### Examples
+
+- Large zoom effects
+- Parallax scrolling
+- Auto-playing animations
+- Excessive transitions
+
+### Recommendations
+
+- Keep animations subtle and purposeful
+- Avoid unnecessary movement
+- Allow animations to be reduced or disabled
+
+#### Respect User Preferences
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
+}
+```
+
+---
+
+## Responsive Zoom
+
+Users should be able to zoom content without losing functionality.
+
+### Why It Matters
+
+Many users increase zoom levels to:
+
+- Read text more easily
+- View interface elements more clearly
+
+### Common Issues
+
+- Clipped text
+- Hidden content
+- Horizontal scrolling
+- Overlapping elements
+
+### Recommendations
+
+- Test at 200% zoom
+- Avoid fixed-height containers when possible
+- Ensure layouts adapt gracefully
+- Maintain functionality at larger text sizes
+
+---
+
+## Design Accessibility Checklist
+
+Before handing off a design:
+
+### Color & Contrast
+
+- Sufficient contrast ratios
+- Information is not conveyed by color alone
+
+### Typography
+
+- Readable font sizes
+- Adequate spacing
+- Clear visual hierarchy
+
+### Interaction
+
+- Visible focus indicators
+- Appropriate touch target sizes
+- Clear interactive states
+
+### Motion
+
+- Avoid excessive animation
+- Respect reduced-motion preferences
+
+### Responsiveness
+
+- Supports zoom up to 200%
+- Content remains usable at different viewport sizes
+
+---
+
+## Key Takeaways
+
+- Accessibility begins during design.
+- Good accessibility improves usability for everyone.
+- Color, typography, spacing, and interaction design all impact accessibility.
+- Designing with accessibility in mind reduces implementation effort and improves overall product quality.

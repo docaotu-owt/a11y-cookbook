@@ -1,97 +1,395 @@
 ---
-title: How to test ?
+title: Accessibility Testing
 layout: ../layouts/Layout.astro
 ---
 
-## How to Test
+# Accessibility Testing
 
-This page can be used to verify how assistive technologies interpret common HTML elements such as headings, links, buttons, images, lists, tables, and form controls.
+Accessibility testing helps identify barriers that may prevent users from successfully interacting with a website or application.
 
-### Keyboard Navigation
+Automated tools can catch many issues, but manual testing is still essential.
 
-Try navigating the page without using a mouse.
-
-| Key         | Action                                   |
-| ----------- | ---------------------------------------- |
-| Tab         | Move to the next interactive element     |
-| Shift + Tab | Move to the previous interactive element |
-| Enter       | Activate a link or button                |
-| Space       | Activate a button, checkbox, or switch   |
-
-Verify that:
-
-- All interactive elements can receive focus.
-- Focus order is logical.
-- Visible focus indicators are present.
-- No mouse interaction is required.
+This guide covers common accessibility testing methods and tools.
 
 ---
 
-### macOS (VoiceOver)
+## Testing Strategy
 
-Enable VoiceOver:
+A complete accessibility testing workflow typically includes:
 
-```txt
-⌘ + F5
+1. Keyboard Testing
+2. Screen Reader Testing
+3. Automated Audits
+4. Manual Review
+
+No single tool can detect all accessibility issues.
+
+---
+
+## Keyboard Testing
+
+Keyboard testing is often the quickest way to identify accessibility problems.
+
+### Why It Matters
+
+Many users rely on:
+
+- Keyboard navigation
+- Switch devices
+- Voice control software
+
+If an interface cannot be used without a mouse, it is not accessible.
+
+### How to Test
+
+Disconnect the mouse or avoid using it.
+
+Use only:
+
+| Key         | Purpose                     |
+| ----------- | --------------------------- |
+| Tab         | Move focus forward          |
+| Shift + Tab | Move focus backward         |
+| Enter       | Activate controls           |
+| Space       | Activate controls           |
+| Escape      | Close dialogs and menus     |
+| Arrow Keys  | Navigate certain components |
+
+### Verify
+
+- Every interactive element is reachable.
+- Focus order is logical.
+- Focus indicators are visible.
+- No keyboard traps exist.
+- All functionality is available via keyboard.
+
+### Common Issues
+
+- Clickable div elements
+- Hidden focus indicators
+- Components that only support mouse interactions
+- Focus becoming lost after actions
+
+---
+
+## VoiceOver
+
+VoiceOver is the built-in screen reader available on macOS and iOS.
+
+### Why It Matters
+
+VoiceOver helps developers understand how screen reader users experience an application.
+
+### Starting VoiceOver
+
+#### macOS
+
+Keyboard shortcut:
+
+```txt id="hy11hc"
+Command + F5
 ```
 
-Common shortcuts:
+or enable through System Settings.
 
-| Shortcut             | Action        |
-| -------------------- | ------------- |
-| Control + Option + → | Next item     |
-| Control + Option + ← | Previous item |
-| Control + Option + A | Read all      |
-| Control + Option + U | Open Rotor    |
+#### iPhone / iPad
 
-Using VoiceOver, verify that:
+Settings → Accessibility → VoiceOver
 
-- Headings announce their level.
-- Links announce as links.
-- Buttons announce as buttons.
-- Images announce their alternative text.
-- Lists announce the number of items.
-- Tables announce row and column headers.
-- Form controls announce their labels.
+### What to Test
 
----
+#### Page Structure
 
-### Windows (NVDA)
-
-Install and launch NVDA.
-
-Common shortcuts:
-
-| Shortcut   | Action          |
-| ---------- | --------------- |
-| H          | Next heading    |
-| K          | Next link       |
-| B          | Next button     |
-| T          | Next table      |
-| F          | Next form field |
-| Insert + ↓ | Read all        |
-
-Using NVDA, verify that:
+Verify:
 
 - Headings are announced correctly.
-- Form controls announce their labels.
-- Tables announce associated headers.
-- Images announce alternative text.
-- Interactive elements expose the correct role.
+- Landmarks are exposed.
+- Reading order is logical.
+
+#### Controls
+
+Verify:
+
+- Buttons are announced as buttons.
+- Links are announced as links.
+- Form fields have labels.
+
+#### Dynamic Content
+
+Verify:
+
+- Dialogs are announced.
+- Error messages are announced.
+- Live regions behave correctly.
+
+### Common Issues
+
+- Missing labels
+- Incorrect heading hierarchy
+- Missing alternative text
+- Poor focus management
 
 ---
 
-### Accessibility Checklist
+## NVDA
 
-Use this checklist when testing examples:
+NVDA (NonVisual Desktop Access) is a free screen reader for Windows.
 
-- [ ] All functionality is keyboard accessible
-- [ ] Focus order is logical
-- [ ] Visible focus indicators are present
-- [ ] Headings follow a logical hierarchy
-- [ ] Links have meaningful text
-- [ ] Buttons clearly describe their action
-- [ ] Images have appropriate alternative text
-- [ ] Form controls have labels
-- [ ] Tables use proper headers
-- [ ] Screen readers announce content correctly
+### Why It Matters
+
+NVDA is widely used and commonly recommended for accessibility testing.
+
+### Installation
+
+Download from:
+
+```txt id="z5shku"
+https://www.nvaccess.org
+```
+
+### What to Test
+
+#### Navigation
+
+Verify:
+
+- Heading navigation works.
+- Landmark navigation works.
+- Tables are announced correctly.
+
+#### Forms
+
+Verify:
+
+- Labels are announced.
+- Required fields are announced.
+- Error messages are announced.
+
+#### Components
+
+Verify:
+
+- Accordions
+- Tabs
+- Menus
+- Dialogs
+- Comboboxes
+
+announce state changes correctly.
+
+### Common Issues
+
+- Missing ARIA relationships
+- Missing accessible names
+- Incorrect component roles
+- Improper focus handling
+
+---
+
+# Lighthouse
+
+Lighthouse is an automated auditing tool built into Chrome DevTools.
+
+## Opening Lighthouse
+
+1. Open Chrome DevTools
+2. Navigate to Lighthouse
+3. Select Accessibility
+4. Run Audit
+
+## What It Checks
+
+Examples:
+
+- Color contrast
+- Missing labels
+- Missing alternative text
+- Heading structure
+- Form accessibility
+
+## Benefits
+
+- Fast
+- Easy to use
+- Built into Chrome
+
+## Limitations
+
+Lighthouse cannot determine:
+
+- Whether content is understandable
+- Whether keyboard interactions are correct
+- Whether screen reader behavior is acceptable
+
+Manual testing is still required.
+
+---
+
+## axe DevTools
+
+axe DevTools is one of the most widely used accessibility testing tools.
+
+### Installation
+
+Available as a browser extension.
+
+Supported browsers include:
+
+- Chrome
+- Edge
+- Firefox
+
+### What It Checks
+
+Examples:
+
+- Missing labels
+- Missing form associations
+- ARIA misuse
+- Color contrast issues
+- Landmark issues
+
+### Benefits
+
+- Easy to use
+- Actionable recommendations
+- Industry-standard accessibility rules
+
+### Limitations
+
+Like all automated tools:
+
+- Cannot verify usability
+- Cannot verify screen reader experience
+- Cannot verify keyboard workflows
+
+---
+
+### Automated vs Manual Testing
+
+#### Automated Testing
+
+Examples:
+
+- Lighthouse
+- axe DevTools
+
+Benefits:
+
+- Fast
+- Consistent
+- Easy to integrate
+
+Finds:
+
+- Missing labels
+- Missing alt text
+- Contrast issues
+- ARIA violations
+
+---
+
+## Manual Testing
+
+Examples:
+
+- Keyboard testing
+- VoiceOver
+- NVDA
+
+Benefits:
+
+- Real user experience
+- Interaction validation
+- Workflow validation
+
+Finds:
+
+- Focus issues
+- Confusing navigation
+- Poor screen reader experience
+- Unusable components
+
+---
+
+## Recommended Testing Workflow
+
+For every feature:
+
+### Step 1
+
+Keyboard Test
+
+Verify:
+
+- Navigation
+- Focus order
+- Focus visibility
+
+### Step 2
+
+Run axe DevTools
+
+Fix all reported issues.
+
+### Step 3
+
+Run Lighthouse
+
+Review accessibility findings.
+
+### Step 4
+
+Screen Reader Test
+
+Using:
+
+- VoiceOver (macOS)
+- NVDA (Windows)
+
+Verify:
+
+- Labels
+- Headings
+- Announcements
+- Reading order
+
+---
+
+## Accessibility Testing Checklist
+
+Before releasing a feature:
+
+### Keyboard
+
+- All controls are reachable
+- Visible focus indicators
+- No keyboard traps
+
+### Screen Readers
+
+- Labels announced correctly
+- Headings announced correctly
+- Forms are understandable
+- Dynamic updates are announced
+
+### Automated Audits
+
+- Lighthouse passes
+- axe DevTools issues resolved
+
+### Content
+
+- Clear language
+- Meaningful link text
+- Helpful error messages
+
+---
+
+## Key Takeaways
+
+- Accessibility testing should combine automated and manual techniques.
+- Keyboard testing should be part of every development workflow.
+- Screen reader testing helps validate the real user experience.
+- Lighthouse and axe DevTools are valuable tools, but they cannot replace manual testing.
+- The most effective accessibility strategy combines development best practices with regular testing.
