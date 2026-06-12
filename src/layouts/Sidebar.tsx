@@ -61,7 +61,6 @@ export function Sidebar({ pathname }: Readonly<SidebarProps>) {
         sticky
         top-0
         flex
-        h-screen
         w-80
         shrink-0
         flex-col
@@ -116,7 +115,7 @@ export function Sidebar({ pathname }: Readonly<SidebarProps>) {
             "
             aria-hidden="true"
           >
-            ⌘K
+            Ctrl + K
           </span>
         </div>
       </div>
@@ -319,7 +318,7 @@ export function Sidebar({ pathname }: Readonly<SidebarProps>) {
           text-slate-500
         "
       >
-        Accessibility Cookbook
+        Accessibility Guide
         <br />
         Internal Documentation
       </div>

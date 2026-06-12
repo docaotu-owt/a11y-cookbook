@@ -28,9 +28,6 @@ export function Header() {
   return (
     <header
       className="
-        sticky
-        top-0
-        z-50
         border-b
         border-slate-200
         bg-white/90
@@ -61,7 +58,7 @@ export function Header() {
             dark:text-slate-100
           "
         >
-          A11y Cookbook
+          Web Accessibility (a11y) Guide
         </a>
 
         <div

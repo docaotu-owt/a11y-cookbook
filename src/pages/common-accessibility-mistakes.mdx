@@ -1,0 +1,255 @@
+---
+title: Common Accessibility Mistakes
+description: Common accessibility issues found in web applications and how to avoid them.
+layout: ../layouts/Layout.astro
+---
+
+# Common Accessibility Mistakes
+
+Many accessibility issues are not caused by complex implementations. They often come from small oversights that affect keyboard users, screen reader users, and users with low vision.
+
+This page highlights some of the most common accessibility mistakes and how to avoid them.
+
+## Using a `<div>` or `<span>` as a Button
+
+### ❌ Incorrect
+
+```html
+<div onclick="saveChanges()">Save</div>
+```
+
+### Why it's a problem
+
+- Not focusable by keyboard
+- Does not support Enter or Space key interactions
+- Not announced as a button by screen readers
+
+### ✅ Correct
+
+```html
+<button type="button">Save</button>
+```
+
+Use native HTML elements whenever possible.
+
+---
+
+## Missing Form Labels
+
+### ❌ Incorrect
+
+```html
+<input type="email" placeholder="Email Address" />
+```
+
+### Why it's a problem
+
+Placeholders are not a replacement for labels. Screen reader users may not know the purpose of the field.
+
+### ✅ Correct
+
+```html
+<label for="email">Email Address</label> <input id="email" type="email" />
+```
+
+Every form control should have an accessible label.
+
+---
+
+## Missing Alternative Text for Images
+
+### ❌ Incorrect
+
+```html
+<img src="profile.jpg" />
+```
+
+### Why it's a problem
+
+Screen readers cannot determine the meaning of the image.
+
+### ✅ Correct
+
+```html
+<img src="profile.jpg" alt="User profile picture" />
+```
+
+For decorative images:
+
+```html
+<img src="divider.png" alt="" />
+```
+
+---
+
+## Poor Heading Structure
+
+### ❌ Incorrect
+
+```html
+<h1>Accessibility Guide</h1>
+<h4>Keyboard Navigation</h4>
+```
+
+### Why it's a problem
+
+Skipping heading levels creates a confusing document structure.
+
+### ✅ Correct
+
+```html
+<h1>Accessibility Guide</h1>
+<h2>Keyboard Navigation</h2>
+<h3>Focus Management</h3>
+```
+
+Headings should form a logical hierarchy.
+
+---
+
+## Removing Focus Indicators
+
+### ❌ Incorrect
+
+```css
+*:focus {
+  outline: none;
+}
+```
+
+### Why it's a problem
+
+Keyboard users cannot see where focus is located.
+
+### ✅ Correct
+
+```css
+*:focus-visible {
+  outline: 2px solid currentColor;
+}
+```
+
+Always provide a visible focus indicator.
+
+---
+
+## Relying on Color Alone
+
+### ❌ Incorrect
+
+```html
+<p class="error">Required field</p>
+```
+
+Displayed only in red.
+
+### Why it's a problem
+
+Users with color vision deficiencies may not recognize the meaning.
+
+### ✅ Correct
+
+```html
+<p class="error">Error: Required field</p>
+```
+
+Use text, icons, or other visual cues in addition to color.
+
+---
+
+## Missing Page Titles
+
+### ❌ Incorrect
+
+Every page uses the same title:
+
+```html
+<title>Accessibility Guide</title>
+```
+
+### Why it's a problem
+
+Users cannot easily identify pages in browser tabs or assistive technologies.
+
+### ✅ Correct
+
+```html
+<title>Modal Dialog | Accessibility Guide</title>
+```
+
+Each page should have a unique and descriptive title.
+
+---
+
+## Keyboard Trap
+
+### ❌ Incorrect
+
+A modal dialog opens, but users cannot escape it or close it using the keyboard.
+
+### Why it's a problem
+
+Keyboard users may become stuck.
+
+### ✅ Correct
+
+- Move focus into the modal when opened
+- Trap focus within the modal
+- Support the Escape key to close
+- Return focus to the triggering element when closed
+
+---
+
+## Missing Skip Navigation Link
+
+### ❌ Incorrect
+
+Keyboard users must tab through the entire navigation menu on every page.
+
+### ✅ Correct
+
+```html
+<a href="#main-content" class="skip-link"> Skip to main content </a>
+```
+
+Skip links help users quickly access the main content.
+
+---
+
+## Testing Only with a Mouse
+
+### ❌ Incorrect
+
+The application is tested only using a mouse.
+
+### Why it's a problem
+
+Many accessibility issues are invisible during mouse-based testing.
+
+### ✅ Recommended Checks
+
+Before releasing a feature:
+
+- Navigate using only the keyboard
+- Verify focus visibility
+- Check page titles
+- Verify heading structure
+- Test with a screen reader
+- Run automated accessibility checks
+
+---
+
+## Accessibility Checklist
+
+Before shipping a feature, ask yourself:
+
+- Does every interactive element have keyboard support?
+- Is focus visible?
+- Are form fields properly labeled?
+- Are images given appropriate alt text?
+- Does the page have a meaningful title?
+- Is the heading structure logical?
+- Can the feature be used without a mouse?
+- Have accessibility testing tools been run?
+
+Addressing these common issues will significantly improve the accessibility of your application and provide a better experience for all users.

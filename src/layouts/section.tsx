@@ -9,6 +9,7 @@ import {
   ShieldCheckIcon,
   FormIcon,
   TableOfContentsIcon,
+  BugIcon,
 } from "lucide-react";
 
 type Section = SectionItem & {
@@ -91,6 +92,11 @@ export const sections: Section[] = [
     title: "Content Accessibility",
     href: "/content-accessibility",
     icon: <TableOfContentsIcon />,
+  },
+  {
+    title: "Common A11y Mistakes",
+    href: "/common-accessibility-mistakes",
+    icon: <BugIcon />,
   },
   {
     title: "How to test ?",

@@ -1,38 +1,225 @@
 ---
 title: Button
-category: HTML
+description: Learn how to create accessible buttons using native HTML and accessibility best practices.
 layout: ../../layouts/Layout.astro
 ---
 
-import { ButtonGood } from "../../a11y/semantic-html/Button/ButtonGood.tsx";
-import ButtonGoodRaw from "../../a11y/semantic-html/Button/ButtonGood.tsx?raw";
-import CodeExample from "../../helper/CodeExample.astro";
-
 # Button
 
-Buttons trigger actions.
+Buttons allow users to perform actions such as submitting forms, opening dialogs, saving data, or triggering functionality.
 
-## Good Example
+Whenever an element performs an action, use a native `<button>` element instead of recreating button behavior with other HTML elements.
 
-<CodeExample title={"Button example"} source={ButtonGoodRaw}>
-  <ButtonGood />
-</CodeExample>
+## Why Use a Native Button?
 
-## Bad Example
+Native buttons provide:
 
-```tsx
-<div onClick={() => {}}>Save</div>
+- Keyboard support (Enter and Space)
+- Focus management
+- Screen reader support
+- Correct semantics out of the box
+
+### ✅ Correct
+
+```html
+<button type="button">Save Changes</button>
 ```
 
-## Accessibility Notes
+### ❌ Incorrect
 
-- Use native button elements
-- Don't use div + onClick
+```html
+<div onclick="saveChanges()">Save Changes</div>
+```
+
+The `<div>` is not keyboard accessible and is not announced as a button by screen readers.
+
+---
+
+## Button vs Link
+
+Use a button when performing an action.
+
+### Examples
+
+```html
+<button>Save</button>
+<button>Delete</button>
+<button>Open Modal</button>
+```
+
+Use a link when navigating to another page.
+
+```html
+<a href="/settings"> Settings </a>
+```
+
+### Common Mistake
+
+```html
+<a href="#" onclick="saveChanges()"> Save Changes </a>
+```
+
+This should be a button because it performs an action rather than navigation.
+
+---
+
+## Icon Button
+
+Buttons that contain only an icon must provide an accessible name.
+
+### ❌ Incorrect
+
+```html
+<button>
+  <svg>
+    <!-- Search Icon -->
+  </svg>
+</button>
+```
+
+Screen readers may announce:
+
+> Button
+
+### ✅ Correct
+
+```html
+<button aria-label="Search">
+  <svg aria-hidden="true">
+    <!-- Search Icon -->
+  </svg>
+</button>
+```
+
+Screen readers announce:
+
+> Search, button
+
+---
+
+## Icon and Text Button
+
+When visible text is present, an additional `aria-label` is usually unnecessary.
+
+### ✅ Correct
+
+```html
+<button>
+  <svg aria-hidden="true">
+    <!-- Download Icon -->
+  </svg>
+  Download
+</button>
+```
+
+Screen readers automatically use the visible text as the accessible name.
+
+---
+
+## Toggle Button
+
+Use `aria-pressed` when a button represents an on/off state.
+
+### Example
+
+```html
+<button aria-pressed="false">Mute</button>
+```
+
+When activated:
+
+```html
+<button aria-pressed="true">Mute</button>
+```
+
+Screen readers may announce:
+
+> Mute, toggle button, pressed
+
+---
+
+## Disabled Button
+
+Use the native `disabled` attribute when a button cannot be interacted with.
+
+### ✅ Correct
+
+```html
+<button disabled>Submit</button>
+```
+
+### ❌ Avoid
+
+```html
+<button aria-disabled="true">Submit</button>
+```
+
+`aria-disabled` communicates state but does not prevent interaction.
+
+---
+
+## Loading Button
+
+Prevent users from triggering the same action repeatedly while processing.
+
+### Example
+
+```html
+<button disabled aria-busy="true">Saving...</button>
+```
+
+This communicates that the action is currently in progress.
+
+---
+
+## Focus Indicators
+
+Keyboard users rely on visible focus indicators to understand where they are on the page.
+
+### ❌ Incorrect
+
+```css
+button:focus {
+  outline: none;
+}
+```
+
+### ✅ Correct
+
+```css
+button:focus-visible {
+  outline: 2px solid currentColor;
+}
+```
+
+Never remove focus styles without providing an accessible alternative.
+
+---
 
 ## Keyboard Support
 
-| Key   | Action       |
-| ----- | ------------ |
-| Tab   | Focus button |
-| Enter | Activate     |
-| Space | Activate     |
+Native buttons support keyboard interaction automatically.
+
+| Key   | Expected Behavior    |
+| ----- | -------------------- |
+| Tab   | Move focus to button |
+| Enter | Activate button      |
+| Space | Activate button      |
+
+Avoid recreating button behavior with custom JavaScript whenever possible.
+
+---
+
+## Accessibility Checklist
+
+Before shipping a button component, verify:
+
+- Uses a native `<button>` element
+- Has a meaningful accessible name
+- Supports keyboard interaction
+- Has visible focus styles
+- Icon-only buttons include an accessible label
+- Toggle buttons use `aria-pressed`
+- Disabled state uses the native `disabled` attribute
+
+Following these practices ensures that buttons are accessible to keyboard users, screen reader users, and other assistive technology users.
